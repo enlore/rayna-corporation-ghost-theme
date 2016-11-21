@@ -1,3 +1,6 @@
+/* jshint node: true, asi: true, laxcomma: true, esversion: 6 */
+'use strict'
+
 // Create a mailgun friendly email object
 class MGEmail {
     constructor (opts, meta) {
