@@ -17,6 +17,7 @@
     "ghost": "^0.11.3",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
+    "npm-run-all": "^3.1.1",
     "pg": "latest",
     "superagent": "^3.0.0"
   },
@@ -25,7 +26,13 @@
   },
   "scripts": {
     "postinstall": "ncp node_modules/casper content/themes/casper",
-    "dev": "nodemon server.js",
+    "dev": "npm-run-all --parallel dev:run-server dev:theme-sass dev:watch:theme-sass",
+    "dev:run-server": "nodemon server.js",
+    "dev:theme-sass": "node-sass --output content/themes/rayna-corp-theme/assets/css content/themes/rayna-corp-theme/lib/sass/main.scss",
+    "dev:watch:theme-sass": "node-sass --watch --output content/themes/rayna-corp-theme/assets/css content/themes/rayna-corp-theme/lib/sass/main.scss",
     "start": "node server.js"
+  },
+  "devDependencies": {
+    "susy": "^2.2.12"
   }
 }
