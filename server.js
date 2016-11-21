@@ -4,6 +4,12 @@
 var path = require('path');
 var ghost = require('./ghost-middleware.js');
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
+const bodyParser = require('body-parser')
+
 const MailGun = require('./mg.js')
 const Email   = require('./mgEmail.js')
 
@@ -14,6 +20,10 @@ const mg = new MailGun({
 
 const express = require('express')
 const app = express()
+
+app.use(bodyParser.json({
+    limit: '1mb'
+}))
 
 app.get('/api/ask-rayna', (req, res, next) => {
     res.json({
@@ -32,27 +42,37 @@ app.post('/api/ask-rayna', (req, res, next) => {
         'ask-rayna-message'
     ])
 
+    console.info(mailOpts)
+
     const mailBody = `
-
-From: ${mailOpts['ask-rayna-name']} <${mailOpts['ask-rayna-email']}>
-Phone: ${mailOpts['ask-rayna-phone']}
-Question: ${mailOpts['ask-rayna-message']}
-
+        From: ${mailOpts['ask-rayna-name']}\n
+        Contact Email: ${mailOpts['ask-rayna-email']}\n
+        Contact Phone: ${mailOpts['ask-rayna-phone']}\n
+        Question: ${mailOpts['ask-rayna-message']}\n
     `
 
-    const mail = new Emai({
+    const mailHtmlBody =`
+        <p> Submitter: ${mailOpts['ask-rayna-name']}</p>
+        <p> Contact Email: ${mailOpts['ask-rayna-email']}</p>
+        <p> Contact Phone: ${mailOpts['ask-rayna-phone']}</p>
+        <p> Question: ${mailOpts['ask-rayna-message']}</p>
+    `
+
+    const mail = new Email({
         to: process.env.ASK_RAYNA_RECIPIENT,
         from: 'app@raynacorp.com',
         subject: 'Ask RayNa - Submission',
-        html: mailBody,
+        html: mailHtmlBody,
         text: mailBody
     })
 
-    mg.send({ email: mail }, (err) => {
+    mg.send({ email: mail }, (err, resp) => {
         if (err) {
             err.syscall = 'MailGun.send'
             return next(err)
         }
+
+        console.info(resp.body)
 
         // 200 to client is all we need
         return res.end()
@@ -64,6 +84,8 @@ app.use('/', ghost({
 }))
 
 app.use((err, req, res, next) => {
+    console.error(err)
+
     if (err.syscall === 'MailGun.send') {
         res.json({
             exception: err,
@@ -87,8 +109,12 @@ function pick (obj/*, props */) {
     let props = Array.prototype.slice.call(arguments, 1)
     let res = {}
 
+    // TODO bleah
+    if (Array.isArray(props[0]))
+        props = props[0]
+
     props.forEach(prop => {
-        if (Object.hasOwnProperty(obj, prop))
+        if (Object.prototype.hasOwnProperty.call(obj, prop))
             res[prop] = obj[prop]
     })
 
