@@ -1,7 +1,7 @@
 {
-  "name": "casper",
-  "description": "The default personal blogging theme for Ghost. Beautiful, minimal and responsive.",
-  "demo": "https://demo.ghost.io",
+  "name": "rayna-by-fog",
+  "description": "Rayna by fog., a custom theme",
+  "demo": "http://fog.haus",
   "version": "1.3.3",
   "engines": {
     "ghost": ">=0.9.0 <1.0.0"
@@ -12,9 +12,9 @@
     "mobile": "assets/screenshot-mobile.jpg"
   },
   "author": {
-    "name": "Ghost Foundation",
-    "email": "hello@ghost.org",
-    "url": "https://ghost.org"
+    "name": "fog.",
+    "email": "inquiries@fog.haus",
+    "url": "http://fog.haus"
   },
   "gpm": {
     "type": "theme",
@@ -29,18 +29,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TryGhost/Casper.git"
+    "url": "https://github.com/fog-haus"
   },
   "bugs": {
-    "url": "https://github.com/TryGhost/Casper/issues"
-  },
-  "contributors": "https://github.com/TryGhost/Casper/graphs/contributors",
-  "gitHead": "27270d3de3de2e4e6f6c3a706831a6e9dec6a368",
-  "readme": "# Casper\n\nThe default theme for [Ghost](http://github.com/tryghost/ghost/).\n\nTo download, visit the [releases](https://github.com/TryGhost/Casper/releases) page.\n\n## Copyright & License\n\nCopyright (c) 2013-2016 Ghost Foundation - Released under the MIT License.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
-  "readmeFilename": "README.md",
-  "homepage": "https://github.com/TryGhost/Casper#readme",
-  "_id": "casper@1.3.3",
-  "_shasum": "740c5f94fd2651e5c4680159a129518a490c744f",
-  "_from": "tryghost/Casper#1.3.3",
-  "_resolved": "git://github.com/tryghost/Casper.git#27270d3de3de2e4e6f6c3a706831a6e9dec6a368"
+    "url": "https://github.com/fog-haus"
+  }
 }
