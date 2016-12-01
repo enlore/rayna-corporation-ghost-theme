@@ -1,0 +1,24 @@
+| {{!< default}}
+
+| {{!-- This is a page template. A page outputs content just like any other post, and has all the same
+|     attributes by default, but you can also customise it to behave differently if you prefer. --}}
+
+| {{!-- Everything inside the #post tags pulls data from the page --}}
+
+| {{#post}}
+
+header
+  nav.mainNav
+    | {{#if @blog.logo}}<a class="blog-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>{{/if}}
+    | {{#if @blog.navigation}}
+    |     <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+    | {{/if}}
+
+main.content
+  article(class="{{ post_class }}")
+    header.postHeader
+      h1.postTitle {{ title }}
+
+    section.postContent {{ content }}
+
+| {{/post}}

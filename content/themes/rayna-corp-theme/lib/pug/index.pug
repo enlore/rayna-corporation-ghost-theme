@@ -1,0 +1,102 @@
+| {{!< default}}
+| {{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+| 
+| {{!-- The big featured header --}}
+| {{!-- @blog.cover - string, cover image url--}}
+| {{!-- @blog.url - string --}}
+| {{!-- @blog.logo - string, logo url --}}
+| {{!-- @blog.title - string --}}
+| {{!-- @blog.navigation - boolean? --}}
+| {{!-- @blog.description - string --}}
+| {{!-- {{> "loop" }} - main post summary loop --}}
+| 
+| {{!-- Samples: --}}
+| 
+| {{!-- <header class="main-header {{#if @blog.cover}}" style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}"> --}}
+| {{!-- </header> --}}
+| {{!-- {{#if @blog.navigation}} --}}
+|     {{!-- <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a> --}}
+| {{!-- {{/if}} --}}
+| 
+| {{!-- The main content area on the homepage --}}
+
+main#content.content(role="main")
+  header
+    h1.half We build efficiency and accelerate business growth.
+
+  //| {{> "loop"}}
+
+  section
+    h2.half.
+      We’re productivity experts. Want to know what we know?
+
+    .half
+      button.buttonCTA Ask RayNa
+      p.caption It's really simple.
+
+
+  section
+    .whole
+      p.annotation What we’re about.
+      h1 We meet you where you are.
+
+    .half
+      p.bodyCopy--large.
+        As efficiency experts, we help you make money faster, easier and smarter.
+        We create systems for optimal growth, or maximize pre-existing ones.
+
+      p.bodyCopy--large
+        a Learn more &gt;&gt;
+
+    .half
+      img.contentImg(src="http://placehold.it/450x300")
+
+
+  section
+    .half
+      h2 See what everyone is yappin’ about.
+
+    .half
+      h3 Brett Owens
+      p.bodyCopy--large CEO & Co-Founder, Chrometa
+      p.
+        RayNa Corp is our #1 partner in the industry. We literally consider
+        them apart of our own team and so do our clients.
+
+  section
+    p.annotation What we're talking about.
+
+    .half
+      img.contentImg(src="http://placehold.it/520x475")
+
+    .half
+      h1 Five questions for Law Tech Entrepreneurs
+      p.bodyCopy--large 11/04/16  •  5 min read
+      p.bodyCopy--large.
+        Recently Attorney at Work asked three legal technology entrepreneurs
+        — all speakers at this fall’s Clio Cloud Conference…
+
+    .row.postSummaries
+      .half
+        img.contentImg(src="http://placehold.it/450x300")
+        h3 Five questions for Law Tech Entrepreneurs
+        p.bodyCopy 11/04/16  •  5 min read
+        p.bodyCopy.
+          Recently Attorney at Work asked three legal technology entrepreneurs
+          — all speakers at this fall’s Clio Cloud Conference…
+
+      .half
+        img.contentImg(src="http://placehold.it/450x300")
+        h3 Five questions for Law Tech Entrepreneurs
+        p.bodyCopy 11/04/16  •  5 min read
+        p.bodyCopy.
+          Recently Attorney at Work asked three legal technology entrepreneurs
+          — all speakers at this fall’s Clio Cloud Conference…
+
+  section
+    .seven
+      h3 Get weekly insights from RayNa.
+      h4 Directly in your inbox every Friday Morning.
+
+    .five
+      input(type="email", placeholder="email address")

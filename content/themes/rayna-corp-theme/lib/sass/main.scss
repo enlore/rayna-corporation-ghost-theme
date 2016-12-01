@@ -1,36 +1,29 @@
-@import '../../../../../node_modules/susy/sass/susy.scss';
+@import './_layout.scss';
+@import './_typo.scss';
 
-$susy: (
-  flow: ltr,
-  math: fluid,
-  output: float,
-  gutter-position: after,
-  container: auto,
-  container-position: center,
-  columns: 4,
-  gutters: .25,
-  column-width: false,
-  global-box-sizing: content-box,
-  last-flow: to,
-  debug: (
-    image: hide,
-    color: rgba(#66f, .25),
-    output: background,
-    toggle: top right,
-  ),
-  use-custom: (
-    background-image: true,
-    background-options: false,
-    box-sizing: true,
-    clearfix: false,
-    rem: true,
-  )
-);
-
-.dummy-wrap {
-    @include container;
+* {
+    box-sizing: border-box;
 }
 
-.dummy-3rd {
-    @include span(33.3%);
+button {
+   display: block;
+   max-width: 350px;
+   width: 100%;
+   padding: 0 16px;
+   height: 76px;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input {
+    display: block;
+    width: 100%;
+    height: 58px;
+}
+
+.postSummaries {
+    padding-top: 2rem; 
 }

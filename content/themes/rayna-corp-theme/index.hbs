@@ -1,6 +1,7 @@
+
 {{!< default}}
 {{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
-
+ 
 {{!-- The big featured header --}}
 {{!-- @blog.cover - string, cover image url--}}
 {{!-- @blog.url - string --}}
@@ -9,20 +10,100 @@
 {{!-- @blog.navigation - boolean? --}}
 {{!-- @blog.description - string --}}
 {{!-- {{> "loop" }} - main post summary loop --}}
-
+ 
 {{!-- Samples: --}}
-
+ 
 {{!-- <header class="main-header {{#if @blog.cover}}" style="background-image: url({{@blog.cover}}){{else}}no-cover{{/if}}"> --}}
 {{!-- </header> --}}
 {{!-- {{#if @blog.navigation}} --}}
     {{!-- <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a> --}}
 {{!-- {{/if}} --}}
-
+ 
 {{!-- The main content area on the homepage --}}
-<main id="content" class="content" role="main">
-
-    <h1> Hello here is the main area of this theme </h1>
-    {{!-- The tag below includes the post loop - partials/loop.hbs --}}
-    {{> "loop"}}
-
+<main class="content" id="content" role="main">
+  <header>
+    <h1 class="half">We build efficiency and accelerate business growth.</h1>
+  </header>
+  <!--| {{> "loop"}}-->
+  <section>
+    <h2 class="half">
+      We’re productivity experts. Want to know what we know?
+      
+    </h2>
+    <div class="half">
+      <button class="buttonCTA">Ask RayNa</button>
+      <p class="caption">It's really simple.</p>
+    </div>
+  </section>
+  <section>
+    <div class="whole">
+      <p class="annotation">What we’re about.</p>
+      <h1>We meet you where you are.</h1>
+    </div>
+    <div class="half">
+      <p class="bodyCopy--large">
+        As efficiency experts, we help you make money faster, easier and smarter.
+        We create systems for optimal growth, or maximize pre-existing ones.
+        
+      </p>
+      <p class="bodyCopy--large"><a>Learn more &gt;&gt;</a></p>
+    </div>
+    <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/></div>
+  </section>
+  <section>
+    <div class="half">
+      <h2>See what everyone is yappin’ about.</h2>
+    </div>
+    <div class="half">
+      <h3>Brett Owens</h3>
+      <p class="bodyCopy--large">CEO & Co-Founder, Chrometa</p>
+      <p>
+        RayNa Corp is our #1 partner in the industry. We literally consider
+        them apart of our own team and so do our clients.
+        
+      </p>
+    </div>
+  </section>
+  <section>
+    <p class="annotation">What we're talking about.</p>
+    <div class="half"><img class="contentImg" src="http://placehold.it/520x475"/></div>
+    <div class="half">
+      <h1>Five questions for Law Tech Entrepreneurs</h1>
+      <p class="bodyCopy--large">11/04/16  •  5 min read</p>
+      <p class="bodyCopy--large">
+        Recently Attorney at Work asked three legal technology entrepreneurs
+        — all speakers at this fall’s Clio Cloud Conference…
+        
+      </p>
+    </div>
+    <div class="row postSummaries">
+      <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/>
+        <h3>Five questions for Law Tech Entrepreneurs</h3>
+        <p class="bodyCopy">11/04/16  •  5 min read</p>
+        <p class="bodyCopy">
+          Recently Attorney at Work asked three legal technology entrepreneurs
+          — all speakers at this fall’s Clio Cloud Conference…
+          
+        </p>
+      </div>
+      <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/>
+        <h3>Five questions for Law Tech Entrepreneurs</h3>
+        <p class="bodyCopy">11/04/16  •  5 min read</p>
+        <p class="bodyCopy">
+          Recently Attorney at Work asked three legal technology entrepreneurs
+          — all speakers at this fall’s Clio Cloud Conference…
+          
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="seven">
+      <h3>Get weekly insights from RayNa.</h3>
+      <h4>Directly in your inbox every Friday Morning.</h4>
+    </div>
+    <div class="five">
+      <input type="email" placeholder="email address"/>
+    </div>
+  </section>
 </main>
