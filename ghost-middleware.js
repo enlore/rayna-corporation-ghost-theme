@@ -6,7 +6,8 @@ const ghost = require('ghost')
 function processBufferedRequests (buff, app) {
     while (buff.length) {
         let req_res = buff.pop()
-        app(req_res[0], req_res[1], req_res[2])
+        console.log(req_res)
+        app(req_res[0], req_res[1])
     }
 }
 
@@ -16,14 +17,17 @@ module.exports = function makeGhost (opts) {
 
     ghost(opts).then(ghostApp => {
         // what is this?
+         console.log('in ghost.then')
         app = ghostApp.rootApp
         processBufferedRequests(requestBuff, app)
     })
 
-    return function requestHandler (req, res, next) {
+    return function requestHandler (req, res) {
         if (!app)
-            requestBuff.unshift(req, res, next)
-        else
-            app(req, res, next)
+            requestBuff.unshift([req, res])
+        else {
+            console.log('else clause in ghost req handler')
+            app(req, res)
+        }
     }
 }

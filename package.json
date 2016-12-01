@@ -17,8 +17,10 @@
     "ghost": "^0.11.3",
     "ghost-s3-storage-adapter": "3.0.4",
     "ncp": "^2.0.0",
+    "node-sass": "^3.13.0",
     "npm-run-all": "^3.1.1",
     "pg": "latest",
+    "sqlite3": "^3.1.8",
     "superagent": "^3.0.0"
   },
   "engines": {
@@ -26,8 +28,10 @@
   },
   "scripts": {
     "postinstall": "ncp node_modules/casper content/themes/casper",
-    "dev": "npm-run-all --parallel dev:run-server dev:theme-sass dev:watch:theme-sass",
+    "dev": "npm-run-all --parallel dev:run-server dev:theme-sass dev:watch:theme-sass dev:watch:pug",
     "dev:run-server": "nodemon server.js",
+    "dev:pug": "pug -P -E hbs -o ./content/themes/rayna-corp-theme content/themes/rayna-corp-theme/lib/pug/*",
+    "dev:watch:pug": "pug -P -w -E hbs -o ./content/themes/rayna-corp-theme content/themes/rayna-corp-theme/lib/pug/*",
     "dev:theme-sass": "node-sass --output content/themes/rayna-corp-theme/assets/css content/themes/rayna-corp-theme/lib/sass/main.scss",
     "dev:watch:theme-sass": "node-sass --watch --output content/themes/rayna-corp-theme/assets/css content/themes/rayna-corp-theme/lib/sass/main.scss",
     "start": "node server.js"
