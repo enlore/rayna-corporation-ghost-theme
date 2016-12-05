@@ -1,8 +1,28 @@
+// purple
+$colorPrimary: #554971;
+$colorPrimary-shade: #36213E;
+
+// blue
+$colorSecondary: #8AC6D0;
+$colorSecondary-shade: #63768D;
+$colorSecondary-tint: #B8F3FF;
+
+// basics
+$white: #fff;
+$grey: #9B9B9B;
+$black: #110E16;
+
 @import './_layout.scss';
 @import './_typo.scss';
 
 * {
     box-sizing: border-box;
+}
+
+html, body {
+    background-color: $white;
+    //color: $black;
+    color: $grey;
 }
 
 button {
