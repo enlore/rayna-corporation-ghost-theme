@@ -17,6 +17,7 @@ html
 
     | {{!-- Styles'n'Scripts --}}
     link(rel="stylesheet", type="text/css", href="https://fonts.googleapis.com/css?family=Lora")
+    link(rel="stylesheet", type="text/css", href="{{ asset 'css/normalize.css' }}")
     link(rel="stylesheet", type="text/css", href="{{asset 'css/main.css'}}")
 
     | {{!-- Ghost outputs important style and meta data with this tag --}}
@@ -33,9 +34,52 @@ html
 
       | {{!-- The tiny footer at the very bottom --}}
 
+    .outro-cta
+      section
+        .seven
+          h3.white Get weekly insights from RayNa.
+          h4 Directly in your inbox every Friday Morning.
+
+        .five
+          input(type="email", placeholder="email address")
+
+    .footer
       footer
-        section.copyright
+        .five
+          h3 RayNa Corp
+
+          p We're pretty social.
+
+          p.
+            Get tuned in to the best words from industry leaders down to the
+            very minute.
+
+          .footer-socialLinks
+            a(href="") Twitter
+            a(href="", style="margin-left: 1rem;") Facebook
+
+          p © RayNa Corp 2016
+
           a(href="{{@blog.url}}") {{ @blog.title }}
+
+        .seven
+          .footer-siteNav
+            a(href="") Blog
+            a(href="") #AskRayna
+            a(href="") Services
+            a(href="") Contact
+
+          .row.footer-cta
+            .half
+              p Still confused after reading all that?
+
+            .half
+              button.btn--secondary() Ask RayNa
+
+          .row.footer-address.u-text-right
+              p 320 E Main St. Ste 200
+              p Murfreesboro, TN 37130
+
 
 
     | {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}

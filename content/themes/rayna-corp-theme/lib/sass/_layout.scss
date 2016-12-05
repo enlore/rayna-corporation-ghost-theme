@@ -27,17 +27,24 @@ $susy: (
   )
 );
 
-section, header {
+section, header, footer {
   @include container;
 }
 
-section {
+footer, section {
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
 
+.collapse {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .row {
     @include break;
+    min-height: 1px;
+    overflow: hidden;
 }
 
 .third {

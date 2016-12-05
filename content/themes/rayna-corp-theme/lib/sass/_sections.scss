@@ -1,0 +1,62 @@
+h1, h2, h3 {
+  color: $colorPrimary;
+  margin: 0.5em 0;
+}
+
+.indexHeader {
+  color: $colorPrimary;
+}
+
+.indexLead {
+  margin: 2rem 0;
+  background-color: $colorPrimary-shade;
+  color: $white;
+}
+
+.indexIntro {
+  background-color: $colorSecondary-shade;
+  color: $white;
+}
+
+.outro-cta {
+  background-color: $colorPrimary;
+  color: $white;
+}
+
+.footer {
+  background-color: $colorPrimary-shade;
+  color: $white;
+}
+
+.footer-socialLinks {
+  margin: 1.5rem 0;
+}
+
+
+.footer-socialLinks a {
+  color: $white;
+}
+
+.footer-siteNav a {
+  margin-left: 1.5rem;
+}
+
+.footer-siteNav a:first-child {
+  margin-left: 0;
+}
+
+.footer-cta {
+  margin-top: 2rem;
+}
+
+.footer-address  {
+  margin-top: 2rem;
+}
+
+.footer-address p {
+  margin: 0.2em 0;
+}
+
+.u-text-right {
+  text-align: right;
+}

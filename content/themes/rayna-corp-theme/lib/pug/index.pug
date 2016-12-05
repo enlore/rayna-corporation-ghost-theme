@@ -21,26 +21,30 @@
 | {{!-- The main content area on the homepage --}}
 
 main#content.content(role="main")
-  header
-    h1.half We build efficiency and accelerate business growth.
+  .indexHeader
+    header
+      p.bigQuote “
+      h1.half  We build efficiency and accelerate business growth.
 
-  //| {{> "loop"}}
+    //| {{> "loop"}}
 
-  section
-    h2.half.
-      We’re productivity experts. Want to know what we know?
+  .indexLead
+    section.collapse
+      h2.white.half.
+        We’re productivity experts. Want to know what we know?
 
-    .half
-      button.buttonCTA Ask RayNa
-      p.caption It's really simple.
+      .half
+        button.btn--secondary Ask RayNa
+        p.caption It's really simple.
 
 
   section
     .whole
       p.annotation What we’re about.
-      h1 We meet you where you are.
 
     .half
+      h1 We meet you where you are.
+
       p.bodyCopy--large.
         As efficiency experts, we help you make money faster, easier and smarter.
         We create systems for optimal growth, or maximize pre-existing ones.
@@ -52,19 +56,22 @@ main#content.content(role="main")
       img.contentImg(src="http://placehold.it/450x300")
 
 
-  section
-    .half
-      h2 See what everyone is yappin’ about.
 
-    .half
-      h3 Brett Owens
-      p.bodyCopy--large CEO & Co-Founder, Chrometa
-      p.
-        RayNa Corp is our #1 partner in the industry. We literally consider
-        them apart of our own team and so do our clients.
+  .indexIntro
+    section
+      .half
+        h2.white See what everyone is yappin’ about.
+
+      .half
+        h3.white Brett Owens
+        p.bodyCopy--large CEO & Co-Founder, Chrometa
+        p.
+          RayNa Corp is our #1 partner in the industry. We literally consider
+          them apart of our own team and so do our clients.
 
   section
-    p.annotation What we're talking about.
+    .whole
+      p.annotation What we're talking about.
 
     .half
       img.contentImg(src="http://placehold.it/520x475")
@@ -92,11 +99,3 @@ main#content.content(role="main")
         p.bodyCopy.
           Recently Attorney at Work asked three legal technology entrepreneurs
           — all speakers at this fall’s Clio Cloud Conference…
-
-  section
-    .seven
-      h3 Get weekly insights from RayNa.
-      h4 Directly in your inbox every Friday Morning.
-
-    .five
-      input(type="email", placeholder="email address")

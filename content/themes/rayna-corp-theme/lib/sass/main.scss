@@ -2,18 +2,30 @@
 $colorPrimary: #554971;
 $colorPrimary-shade: #36213E;
 
+.colorPrimary { color: $colorPrimary; }
+.colorPrimary-shade { color: $colorPrimary-shade; }
+
 // blue
 $colorSecondary: #8AC6D0;
 $colorSecondary-shade: #63768D;
 $colorSecondary-tint: #B8F3FF;
+
+.colorSecondary { color: $colorSecondary; }
+.colorSecondary-shade { color: $colorSecondary-shade; }
+.colorSecondary-tint { color: $colorSecondary-tint; }
 
 // basics
 $white: #fff;
 $grey: #9B9B9B;
 $black: #110E16;
 
+.white { color: $white; }
+.black { color: $black; }
+.grey { color: $grey; }
+
 @import './_layout.scss';
 @import './_typo.scss';
+@import './_sections.scss';
 
 * {
     box-sizing: border-box;
@@ -32,6 +44,25 @@ button {
    width: 100%;
    padding: 0 16px;
    height: 76px;
+   border: none;
+   border-radius: 8px;
+   font-family: 'Lora', serif;
+   font-weight: 600;
+   font-size: 1.2em;
+   cursor: pointer;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: $colorPrimary-shade;
+  border: none;
+  border-radius: 8px;
+  padding-left: 0.5rem;
+}
+
+.btn--secondary {
+  background-color: $colorSecondary-tint;
+  color: $colorPrimary;
 }
 
 img {
