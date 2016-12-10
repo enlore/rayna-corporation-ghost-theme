@@ -9,6 +9,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h1,h2,h3 {
   font-weight: 400;
+  color: inherit;
+  margin: 0.5em 0;
 }
 
 h1, .headline {
@@ -31,6 +33,7 @@ p, .bodyCopy {
   font-size: 20px;
   margin: 0;
   margin-top: 1rem;
+  color: inherit;
 }
 
 .note, .caption, .annotation {
@@ -42,7 +45,7 @@ p, .bodyCopy {
 }
 
 .annotation {
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
 }
 
 a {
@@ -53,6 +56,10 @@ a {
   font-size: 150px;
   height: 70px;
   text-indent: 13px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 // 28

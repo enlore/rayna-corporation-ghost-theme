@@ -31,7 +31,7 @@ section, header, footer {
   @include container;
 }
 
-footer, section {
+header, footer, section {
     padding-top: 5rem;
     padding-bottom: 5rem;
 }
@@ -44,7 +44,15 @@ footer, section {
 .row {
     @include break;
     min-height: 1px;
-    overflow: hidden;
+    //overflow: hidden;
+}
+
+.fourth {
+  @include span(3);
+}
+
+.three-fourths {
+  @include span(9);
 }
 
 .third {

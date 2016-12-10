@@ -1,9 +1,17 @@
 // purple
 $colorPrimary: #554971;
+//$colorPrimary: rgb(85, 73, 113);
 $colorPrimary-shade: #36213E;
+
+@mixin primaryAlpha ($alpha) {
+  background-color: rgba(85, 73, 113, $alpha)
+}
 
 .colorPrimary { color: $colorPrimary; }
 .colorPrimary-shade { color: $colorPrimary-shade; }
+
+.primaryBg { background-color: $colorPrimary; }
+.primaryBg-shade { background-color: $colorPrimary-shade; }
 
 // blue
 $colorSecondary: #8AC6D0;
@@ -13,6 +21,10 @@ $colorSecondary-tint: #B8F3FF;
 .colorSecondary { color: $colorSecondary; }
 .colorSecondary-shade { color: $colorSecondary-shade; }
 .colorSecondary-tint { color: $colorSecondary-tint; }
+
+.secondaryBg { background-color: $colorSecondary; }
+.secondaryBg-shade { background-color: $colorSecondary-shade; }
+.secondaryBg-tint { background-color: $colorSecondary-tint; }
 
 // basics
 $white: #fff;
@@ -26,6 +38,9 @@ $black: #110E16;
 @import './_layout.scss';
 @import './_typo.scss';
 @import './_sections.scss';
+@import './_form.scss';
+//@import './_nav.scss';
+//@import './_footer.scss';
 
 * {
     box-sizing: border-box;
@@ -39,41 +54,64 @@ html, body {
 }
 
 button {
-   display: block;
-   max-width: 350px;
-   width: 100%;
-   padding: 0 16px;
+   display: inline-block;
+   min-width: 128px;
    height: 76px;
+   line-height: 76px;
+   padding: 0 32px;
+
    border: none;
    border-radius: 8px;
+
    font-family: 'Lora', serif;
    font-weight: 600;
    font-size: 1.2em;
+
    cursor: pointer;
+   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
 }
 
+.btn--fullWidth {
+    display: block;
+    width: 100%;
+}
+
+.btn--secondary {
+  background-color: $colorSecondary-tint;
+  color: $black;
+}
+
+textarea,
 input {
   background-color: rgba(255, 255, 255, 0.3);
   color: $colorPrimary-shade;
   border: none;
   border-radius: 8px;
   padding-left: 0.5rem;
+  display: block;
+  width: 100%;
+  height: 58px;
+  margin-top: 8px;
 }
 
-.btn--secondary {
-  background-color: $colorSecondary-tint;
-  color: $colorPrimary;
+textarea.alt,
+input.alt {
+  @include primaryAlpha(0.3);
+  color: $black;
+}
+
+textarea {
+    min-height: 250px;
+}
+
+label {
+  margin-top: 16px;
+  display: block;
 }
 
 img {
     max-width: 100%;
     display: block;
-}
-
-input {
-    display: block;
-    width: 100%;
-    height: 58px;
 }
 
 .postSummaries {
@@ -82,4 +120,12 @@ input {
 
 ul {
   margin: 0;
+}
+
+.u-text-right {
+  text-align: right;
+}
+
+.u-pullRight {
+    float: right;
 }

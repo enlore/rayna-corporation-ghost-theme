@@ -34,7 +34,7 @@ html
 
       | {{!-- The tiny footer at the very bottom --}}
 
-    .outro-cta
+    .outroCta.primaryBg
       section
         .seven
           h3.white Get weekly insights from RayNa.
@@ -43,7 +43,7 @@ html
         .five
           input(type="email", placeholder="email address")
 
-    .footer
+    .footer.primaryBg-shade.white
       footer
         .five
           h3 RayNa Corp
@@ -74,7 +74,7 @@ html
               p Still confused after reading all that?
 
             .half
-              button.btn--secondary() Ask RayNa
+              button.btn--fullWidth.btn--secondary() Ask RayNa
 
           .row.footer-address.u-text-right
               p 320 E Main St. Ste 200
@@ -87,8 +87,6 @@ html
 
     | {{!-- Ghost outputs important scripts and data with this tag --}}
     | {{ghost_foot}}
-    | {{!-- Fitvids makes video embeds responsive and awesome --}}
-    script(type="text/javascript", src="{{asset 'js/jquery.fitvids.js'}}")
 
-    | {{!-- The main JavaScript file for Casper --}}
+    script(type="text/javascript", src="{{asset 'js/jquery.fitvids.js'}}")
     script(type="text/javascript", src="{{asset 'js/index.js'}}")
