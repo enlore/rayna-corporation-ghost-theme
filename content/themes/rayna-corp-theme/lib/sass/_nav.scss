@@ -1,0 +1,65 @@
+.faqBadge {
+    background-color: $colorSecondary-tint;
+    color: $colorPrimary-shade;
+    max-width: 104px;
+    height: 100%;
+    text-align: center;
+    float: left;
+    padding: 16px;
+    position: relative;
+
+    .text {
+        font-weight: 600;
+        font-size: 17px;
+        display: block;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image:  url('/assets/wedge.svg');
+        background-repeat: no-repeat;
+
+    }
+
+    .wedge {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: block;
+        //background-color: $colorPrimary;
+    }
+}
+
+.navBar {
+    @include container();
+    position: relative;
+    height: 80px;
+}
+
+.navBar ul {
+    height: 100%;
+    float: left;
+}
+
+.navBar ul li {
+    display: inline-block;
+    padding: 0 16px;
+    color: $white;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.navBar ul li a {
+    color: $white;
+}
+
+.navBar .subscribe-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $white;
+}
+
+

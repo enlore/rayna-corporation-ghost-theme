@@ -39,8 +39,8 @@ $black: #110E16;
 @import './_typo.scss';
 @import './_sections.scss';
 @import './_form.scss';
-//@import './_nav.scss';
-//@import './_footer.scss';
+@import './_nav.scss';
+@import './_footer.scss';
 
 * {
     box-sizing: border-box;
@@ -115,7 +115,7 @@ img {
 }
 
 .postSummaries {
-    padding-top: 2rem; 
+    padding-top: 2rem;
 }
 
 ul {
@@ -128,4 +128,10 @@ ul {
 
 .u-pullRight {
     float: right;
+}
+
+.u-centerVertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
