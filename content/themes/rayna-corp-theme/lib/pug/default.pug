@@ -60,23 +60,22 @@ html
 
           p © RayNa Corp 2016
 
-          a(href="{{@blog.url}}") {{ @blog.title }}
-
         .seven
           .footer-siteNav
-            a(href="") Blog
-            a(href="") #AskRayna
-            a(href="") Services
-            a(href="") Contact
+            a(href="/blog") Blog
+            a(href="/contact-us") #AskRayna
+            a(href="/services") Services
+            a(href="/contact-us") Contact
 
           .row.footer-cta
             .half
               p Still confused after reading all that?
 
             .half
-              button.btn--fullWidth.btn--secondary() Ask RayNa
+              button.btn--fullWidth.btn--secondary.u-pullRight() Ask RayNa
 
-          .row.footer-address.u-text-right
+          .row.footer-address.u-text-right(style="margin-top: 48px;")
+            .whole
               p 320 E Main St. Ste 200
               p Murfreesboro, TN 37130
 
