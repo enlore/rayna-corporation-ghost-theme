@@ -50,6 +50,9 @@ p, .bodyCopy {
 
 a {
   font-size: inherit;
+  text-decoration: none;
+  //border-bottom: 1px solid $colorPrimary;
+  color: $colorPrimary;
 }
 
 .bigQuote {

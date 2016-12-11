@@ -27,11 +27,16 @@ $susy: (
   )
 );
 
-section, header, footer {
+hr {
+  margin: 32px auto 16px;
+  max-width: 1000px;
+}
+
+.container, section, header, article, footer {
   @include container;
 }
 
-header, footer, section {
+header, footer, article, section {
     padding-top: 5rem;
     padding-bottom: 5rem;
 }

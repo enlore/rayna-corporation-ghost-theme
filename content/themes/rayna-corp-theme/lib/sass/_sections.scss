@@ -77,6 +77,27 @@
   padding-bottom: 60px;
 }
 
+.blackGradientMask {
+  background-image: linear-gradient(-180deg, rgba(0,0,0,0.00) 25%, rgba(0,0,0,0.6) 94%);
+}
+
+.articleHeader header {
+  //z-index: 10;
+  padding-top: 16rem;
+  padding-bottom: 1rem;
+}
+
+.articleContent h1,
+.articleContent h2,
+.articleContent h3 {
+  color: $colorPrimary;
+}
+
+.articleContent p {
+  max-width: 800px;
+  line-height: 1.4;
+}
+
 .footer-socialLinks {
   margin: 1.5rem 0;
 }

@@ -1,0 +1,50 @@
+| {{!< default}}
+
+| {{#post}}
+
+| {{#if image }}
+| <div class="bgWrap" style="background-image: url('/assets/desk-img.jpg');">
+| {{else }}
+| <div class="bgWrap">
+| {{/if }}
+
+.blackGradientMask
+  .articleHeader.white
+    header
+      h1.half {{ title }}
+
+| </div> <!-- /bgWrap -->
+
+.articleContent.black
+  article
+    | {{ content }}
+
+hr
+.container.row
+  .half
+    p Recent Posts
+
+  .half
+    p.u-text-right
+      a(href="/blog") More Posts &gt;&gt;
+
+section
+  | {{#prev_post}}
+  a(href="{{url}}")
+    .half
+      img(src="//placehold.it/450x300")
+      h3 {{ title }}
+      p {{ excerpt words="20" }} &hellip;
+      p 11/04/16 • 5 min read
+  | {{/prev_post}}
+
+  | {{#next_post}}
+  a(href="{{url}}")
+    .half
+      img(src="//placehold.it/450x300")
+      h3 {{ title }}
+      p {{ excerpt words="20" }} &hellip;
+      p 11/04/16 • 5 min read
+  | {{/next_post}}
+
+| {{/post}}
