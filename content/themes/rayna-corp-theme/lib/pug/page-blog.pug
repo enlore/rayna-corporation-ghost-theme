@@ -1,0 +1,21 @@
+| {{!< default}}
+
+main
+  header
+    h1 hey
+
+  section
+    | {{#get "posts" limit="1"}}
+    | {{log pagination}}
+    | {{#foreach posts}}
+    a(href="{{url}}")
+      p {{title}}
+    | {{/foreach}}
+    p {{ pagination.total }}
+    | {{pagination}}
+    | {{/get}}
+
+script(type="text/javascript").
+  window.addEventListener("load", function () {
+    console.log('window loaded')
+  })
