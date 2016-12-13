@@ -63,80 +63,84 @@ script(id="template-posts-summary", type="text/x-template").
   </div><!-- .postSummaries -->
 
 script( type="text/javascript").
-  function parseJSON(response) { return response.json() }
+  ;(function () {
+    function parseJSON(response) { return response.json() }
 
-  function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response
-    } else {
-      var error = new Error(response.statusText)
-      error.response = response
-      throw error
+    function checkStatus(response) {
+      if (response.status >= 200 && response.status < 300) {
+        return response
+      } else {
+        var error = new Error(response.statusText)
+        error.response = response
+        throw error
+      }
     }
-  }
 
-  window.addEventListener("load", function () {
-    var posts = new Vue({
-      el: '#posts',
-      template: '#template-posts-summary',
+    window.addEventListener("load", function () {
+      var posts = new Vue({
+        el: '#posts',
+        template: '#template-posts-summary',
 
-      data: {
-        error: null,
-        featuredPost: null,
-        posts: [],
-        pagination: null
-      },
-
-      methods: {
-        getNext: function getNext () {
-          this.getPosts({ page: this.pagination.next })
+        data: {
+          error: null,
+          featuredPost: null,
+          posts: [],
+          pagination: null
         },
 
-        getPrev: function getPrev () {
-          this.getPosts({ page: this.pagination.prev })
-        },
+        methods: {
+          getNext: function getNext () {
+            this.getPosts({ page: this.pagination.next })
+          },
 
-        getPosts: function getPosts (opts) {
-          opts = opts || {};
-          if (opts.limit === void 0) opts.limit = 2;
+          getPrev: function getPrev () {
+            this.getPosts({ page: this.pagination.prev })
+          },
 
-          let url = ghost.url.api('posts', opts);
+          getPosts: function getPosts (opts) {
+            opts = opts || {};
+            if (opts.limit === void 0) opts.limit = 2;
 
-          var self = this;
+            let url = ghost.url.api('posts', opts);
 
-          self.error = null;
+            var self = this;
 
-          self.loading = true;
+            self.error = null;
 
-          fetch(url)
-            .then(checkStatus)
-            .then(parseJSON)
-            .then(function (body) {
-              self.pagination = body.meta.pagination;
+            self.loading = true;
 
-              self.loading = false;
+            fetch(url)
+              .then(checkStatus)
+              .then(parseJSON)
+              .then(function (body) {
+                self.pagination = body.meta.pagination;
 
-              self.posts = [];
+                self.loading = false;
 
-              body.posts.forEach(function (post) {
-                if (post.featured) self.featuredPost = post;
-                else self.posts.push(post);
+                self.posts = [];
+
+                body.posts.forEach(function (post) {
+                  if (post.featured) self.featuredPost = post;
+                  else self.posts.push(post);
+                })
               })
-            })
-            .catch(function (err) {
-              self.loading = false;
+              .catch(function (err) {
+                self.loading = false;
 
-              this.error = {
-                message: "Something went sideways. Try refreshing the page!"
-              }
-            });
-        }
-      },
+                this.error = {
+                  message: "Something went sideways. Try refreshing the page!"
+                };
+              });
+          }
+        },
 
-      created: function created () {
-        this.getPosts()
-      },
+        created: function created () {
+          this.getPosts();
+        },
 
-      delimiters: ['\\{', '}']
+        delimiters: ['\\{', '}']
+      });
     });
-  })
+  })();
+
+
