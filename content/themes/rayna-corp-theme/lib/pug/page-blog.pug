@@ -1,21 +1,142 @@
 | {{!< default}}
 
 main
-  header
-    h1 hey
+  .primaryBg-shade.white
+    header
+      p.bigQuote “
+      h1 We're here to give you the gift of knowledge.
 
   section
-    | {{#get "posts" limit="1"}}
-    | {{log pagination}}
-    | {{#foreach posts}}
-    a(href="{{url}}")
-      p {{title}}
-    | {{/foreach}}
-    p {{ pagination.total }}
-    | {{pagination}}
-    | {{/get}}
+    p.annotation What We're Talking About
+    #posts
 
-script(type="text/javascript").
+
+script(id="template-posts-summary", type="text/x-template").
+  <div class="postSummaries">
+
+    <div class="featuredPost" v-if="featuredPost">
+        <a :href="featuredPost.url">
+          <div class="featuredPost-image">
+            <img v-if="featuredPost.image"  :src="featuredPost.image" />
+            <img v-else src="/assets/desk-img.jpg" />
+          </div>
+
+          <h2> \{ featuredPost.title } </h2>
+          </a>
+
+      <div class="featuredPost-excerpt" v-html="featuredPost.html"></div>
+
+      <p> \{ featuredPost.published_at } </p>
+    </div>
+
+    <hr />
+
+    <div class="container row">
+      <div class="half">
+        <p> Recent Posts </p>
+      </div>
+    </div>
+
+    <template v-for="post, n in posts">
+      <div class="postSummary row">
+        <a :href="post.url">
+          <div class="postSummary-image half">
+            <img v-if="post.image"  :src="post.image" />
+            <img v-else src="/assets/desk-img.jpg" />
+          </div>
+
+          <div class="postSummary-copy half">
+            <h2 class="postSummary-title"> \{ post.title } </h2>
+
+            <div class="postSummary-excerpt" v-html="post.html"></div>
+            <p class="sm"> \{ post.published_at } </p>
+          </div>
+        </a>
+
+      </div>
+    </template>
+
+    <div class="postsPagination row" v-if="pagination">
+      <a class="half" @click="getPrev" v-if="pagination.prev"> Prev </a>
+      <a class="half u-pullRight u-text-right" @click="getNext" v-if="pagination.next"> Next </a>
+    </div>
+  </div><!-- .postSummaries -->
+
+script( type="text/javascript").
+  function parseJSON(response) { return response.json() }
+
+  function checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response
+    } else {
+      var error = new Error(response.statusText)
+      error.response = response
+      throw error
+    }
+  }
+
   window.addEventListener("load", function () {
-    console.log('window loaded')
+    var posts = new Vue({
+      el: '#posts',
+      template: '#template-posts-summary',
+
+      data: {
+        error: null,
+        featuredPost: null,
+        posts: [],
+        pagination: null
+      },
+
+      methods: {
+        getNext: function getNext () {
+          this.getPosts({ page: this.pagination.next })
+        },
+
+        getPrev: function getPrev () {
+          this.getPosts({ page: this.pagination.prev })
+        },
+
+        getPosts: function getPosts (opts) {
+          opts = opts || {};
+          if (opts.limit === void 0) opts.limit = 2;
+
+          let url = ghost.url.api('posts', opts);
+
+          var self = this;
+
+          self.error = null;
+
+          self.loading = true;
+
+          fetch(url)
+            .then(checkStatus)
+            .then(parseJSON)
+            .then(function (body) {
+              self.pagination = body.meta.pagination;
+
+              self.loading = false;
+
+              self.posts = [];
+
+              body.posts.forEach(function (post) {
+                if (post.featured) self.featuredPost = post;
+                else self.posts.push(post);
+              })
+            })
+            .catch(function (err) {
+              self.loading = false;
+
+              this.error = {
+                message: "Something went sideways. Try refreshing the page!"
+              }
+            });
+        }
+      },
+
+      created: function created () {
+        this.getPosts()
+      },
+
+      delimiters: ['\\{', '}']
+    });
   })

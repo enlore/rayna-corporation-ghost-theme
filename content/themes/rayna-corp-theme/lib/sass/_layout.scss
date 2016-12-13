@@ -51,6 +51,7 @@ header, footer, article, section {
     min-height: 1px;
 }
 
+.clearfix,
 .row:after {
    content: " ";
    display: block;
