@@ -62,6 +62,7 @@ header, footer, article, section {
   clear: both;
   min-height: 1px; }
 
+.clearfix,
 .row:after {
   content: " ";
   display: block;
@@ -162,6 +163,57 @@ a {
 .bold {
   font-weight: bold; }
 
+.portraitGroup,
+.productGroup,
+.serviceGroup {
+  padding-top: 30px;
+  padding-bottom: 30px; }
+
+.productGroup:first-child,
+.serviceGroup:first-child {
+  padding-top: 60px; }
+
+.productGroup:last-child,
+.serviceGroup:last-child {
+  padding-bottom: 60px; }
+
+.blackGradientMask {
+  background-image: linear-gradient(-180deg, transparent 25%, rgba(0, 0, 0, 0.6) 94%); }
+
+.articleHeader header {
+  padding-top: 16rem;
+  padding-bottom: 1rem; }
+
+.articleContent h1,
+.articleContent h2,
+.articleContent h3 {
+  color: #554971; }
+
+.articleContent p {
+  max-width: 800px;
+  line-height: 1.4; }
+
+.featuredPost-excerpt,
+.postSummary-excerpt {
+  max-height: 150px;
+  overflow: hidden; }
+
+.postSummary {
+  margin-top: 48px; }
+
+.postSummary-title {
+  margin-top: 0; }
+
+.postSummary-excerpt h2 {
+  font-size: 1.3em; }
+
+.postsPagination {
+  padding: 32px 0 16px; }
+
+.postsPagination a {
+  cursor: pointer;
+  display: inline-block; }
+
 .faqBadge {
   background-color: #B8F3FF;
   color: #36213E;
@@ -220,34 +272,6 @@ a {
   transform: translateY(-50%);
   color: #fff; }
 
-.productGroup,
-.serviceGroup {
-  padding: 30px 0; }
-
-.productGroup:first-child,
-.serviceGroup:first-child {
-  padding-top: 60px; }
-
-.productGroup:last-child,
-.serviceGroup:last-child {
-  padding-bottom: 60px; }
-
-.blackGradientMask {
-  background-image: linear-gradient(-180deg, transparent 25%, rgba(0, 0, 0, 0.6) 94%); }
-
-.articleHeader header {
-  padding-top: 16rem;
-  padding-bottom: 1rem; }
-
-.articleContent h1,
-.articleContent h2,
-.articleContent h3 {
-  color: #554971; }
-
-.articleContent p {
-  max-width: 800px;
-  line-height: 1.4; }
-
 .footer-socialLinks {
   margin: 1.5rem 0; }
 
@@ -299,6 +323,14 @@ button {
   background-color: #B8F3FF;
   color: #110E16; }
 
+.btn--emboss {
+  background-color: #B8F3FF;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px; }
+
 textarea,
 input {
   background-color: rgba(255, 255, 255, 0.3);
@@ -338,3 +370,8 @@ ul {
 
 .u-pullRight {
   float: right; }
+
+.u-centerVertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
