@@ -36,10 +36,21 @@
   line-height: 1.4;
 }
 
+.featuredPost {
+  padding: 16px;
+}
+
 .featuredPost-excerpt,
 .postSummary-excerpt {
   max-height: 150px;
   overflow: hidden;
+  color: $grey;
+}
+
+.featuredPost-date,
+.postSummary-date {
+  font-weight: bold;
+  color: $grey;
 }
 
 .postSummary {

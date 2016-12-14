@@ -14,6 +14,10 @@ $colorPrimary-shade: #36213E;
     -ms-transform: translateY(-50%);
 }
 
+.verticalCenter {
+  @include vertical-center();
+}
+
 .colorPrimary { color: $colorPrimary; }
 .colorPrimary-shade { color: $colorPrimary-shade; }
 
@@ -130,6 +134,10 @@ img {
 
 .postSummaries {
     padding-top: 2rem;
+}
+
+hr {
+  border: 1px solid $colorPrimary-shade;
 }
 
 ul {
