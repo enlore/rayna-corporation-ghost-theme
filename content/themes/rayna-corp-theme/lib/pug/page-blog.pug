@@ -4,63 +4,76 @@ main
   .primaryBg-shade.white
     header
       p.bigQuote “
-      h1 We're here to give you the gift of knowledge.
+      h1.whole We're here to give you the gift of knowledge.
+      p.seven.
+        We're firm believers in the free flow of information, so take heed of
+        our example and learn from us. We learned the hard way, so all you 
+        would have to do is read our blog.
 
   section
     p.annotation What We're Talking About
     #posts
+      img(src="/assets/loading.gif", style="width: 40px; height: 40px; margin: 0 auto; display: block;")
 
 
 script(id="template-posts-summary", type="text/x-template").
-  <div class="postSummaries">
+  <div> <!-- wrap -->
+    <img id="loading"
+      v-if="loading"
+      style=" width: 40px; height: 40px; margin: 0 auto; display: block;"
+      src="/assets/loading.gif">
 
-    <div class="featuredPost" v-if="featuredPost">
-        <a :href="featuredPost.url">
-          <div class="featuredPost-image">
-            <img v-if="featuredPost.image"  :src="featuredPost.image" />
-            <img v-else src="/assets/desk-img.jpg" />
-          </div>
+    <div class="postSummaries">
+      <div class="featuredPost" v-if="featuredPost">
+          <a :href="featuredPost.url">
+            <div class="featuredPost-image">
+              <img v-if="featuredPost.image"  :src="featuredPost.image" />
+              <img v-else src="/assets/desk-img.jpg" />
+            </div>
 
-          <h2> \{ featuredPost.title } </h2>
+            <h2> \{ featuredPost.title } </h2>
+            </a>
+
+        <div class="featuredPost-excerpt">
+          \{ featuredPost.html | excerpt }
+        </div>
+
+        <p class="featuredPost-date"> \{ featuredPost.published_at | fmatDate } • \{ featuredPost.markdown | calcReadTime } min read</p>
+      </div>
+
+      <hr />
+
+      <div class="container row">
+        <div class="half">
+          <p> Recent Posts </p>
+        </div>
+      </div>
+
+      <template v-for="post, n in posts">
+        <div class="postSummary row">
+          <a :href="post.url">
+            <div class="postSummary-image half">
+              <img v-if="post.image"  :src="post.image" />
+              <img v-else src="/assets/desk-img.jpg" />
+            </div>
+
+            <div class="postSummary-copy half">
+              <h2 class="postSummary-title"> \{ post.title } </h2>
+
+              <div class="postSummary-excerpt" v-html="post.html"></div>
+              <p class="postSummary-date"> \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
+            </div>
           </a>
 
-      <div class="featuredPost-excerpt" v-html="featuredPost.html"></div>
+        </div>
+      </template>
 
-      <p> \{ featuredPost.published_at } </p>
-    </div>
-
-    <hr />
-
-    <div class="container row">
-      <div class="half">
-        <p> Recent Posts </p>
+      <div class="postsPagination row" v-if="pagination">
+        <a class="half" @click="getPrev" v-if="pagination.prev"> Prev </a>
+        <a class="half u-pullRight u-text-right" @click="getNext" v-if="pagination.next"> Next </a>
       </div>
-    </div>
-
-    <template v-for="post, n in posts">
-      <div class="postSummary row">
-        <a :href="post.url">
-          <div class="postSummary-image half">
-            <img v-if="post.image"  :src="post.image" />
-            <img v-else src="/assets/desk-img.jpg" />
-          </div>
-
-          <div class="postSummary-copy half">
-            <h2 class="postSummary-title"> \{ post.title } </h2>
-
-            <div class="postSummary-excerpt" v-html="post.html"></div>
-            <p class="sm"> \{ post.published_at } </p>
-          </div>
-        </a>
-
-      </div>
-    </template>
-
-    <div class="postsPagination row" v-if="pagination">
-      <a class="half" @click="getPrev" v-if="pagination.prev"> Prev </a>
-      <a class="half u-pullRight u-text-right" @click="getNext" v-if="pagination.next"> Next </a>
-    </div>
-  </div><!-- .postSummaries -->
+    </div><!-- .postSummaries -->
+  </div>
 
 script( type="text/javascript").
   ;(function () {
@@ -82,6 +95,7 @@ script( type="text/javascript").
         template: '#template-posts-summary',
 
         data: {
+          loading: false,
           error: null,
           featuredPost: null,
           posts: [],
@@ -99,9 +113,9 @@ script( type="text/javascript").
 
           getPosts: function getPosts (opts) {
             opts = opts || {};
-            if (opts.limit === void 0) opts.limit = 2;
+            if (opts.limit === void 0) opts.limit = 5;
 
-            let url = ghost.url.api('posts', opts);
+            var url = ghost.url.api('posts', opts);
 
             var self = this;
 
@@ -134,11 +148,37 @@ script( type="text/javascript").
           }
         },
 
-        created: function created () {
+        mounted: function mounted () {
           this.getPosts();
         },
 
-        delimiters: ['\\{', '}']
+        delimiters: ['\\{', '}'],
+
+        filters: {
+          fmatDate: function fmatDate (val) {
+            return window.moment(val).format('MM/DD/YY')
+            //return val
+          },
+
+          calcReadTime: function calcReadTime (val) {
+            var count = val.split(' ').length;
+            var seconds = (count / 3);
+            var mins = seconds / 60;
+            return Math.ceil(mins);
+          },
+
+          excerpt: function excerpt (html, len) {
+            len = len === void 0 ? 150 : len;
+
+            var excerpt = html.replace(/<a href="#fn.*?rel="footnote">.*?<\/a>/gi, '');
+            excerpt = excerpt.replace(/<div class="footnotes"><ol>.*?<\/ol><\/div>/, '');
+            // Strip other html
+            excerpt = excerpt.replace(/<\/?[^>]+>/gi, '');
+            excerpt = excerpt.replace(/(\r\n|\n|\r)+/gm, ' ');
+
+            return excerpt.slice(0, len) + '...';
+          }
+        }
       });
     });
   })();

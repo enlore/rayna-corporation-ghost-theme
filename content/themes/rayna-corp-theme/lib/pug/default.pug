@@ -81,12 +81,15 @@ html
 
 
 
+    script(type="text/javascript", src="https://unpkg.com/promise-polyfill")
+    script(type="text/javascript", src="https://unpkg.com/whatwg-fetch")
+    script(type="text/javascript", src="https://unpkg.com/moment")
+    script(type="text/javascript", src="https://unpkg.com/vue/dist/vue.js")
     | {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
-    script(type="text/javascript", src="https://code.jquery.com/jquery-1.12.0.min.js")
+    script(type="text/javascript", src="https://unpkg.com/jquery")
 
     | {{!-- Ghost outputs important scripts and data with this tag --}}
     | {{ghost_foot}}
 
     //script(type="text/javascript", src="{{asset 'js/jquery.fitvids.js'}}")
-    script(type="text/javascript", src="https://unpkg.com/vue/dist/vue.js")
     //script(type="text/javascript", src="{{asset 'js/index.js'}}")
