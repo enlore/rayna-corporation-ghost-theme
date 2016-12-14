@@ -63,12 +63,15 @@
           </div>
         </div>
       </footer>
-    </div>{{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/promise-polyfill"></script>
+    <script type="text/javascript" src="https://unpkg.com/whatwg-fetch"></script>
+    <script type="text/javascript" src="https://unpkg.com/moment"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>{{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
+    <script type="text/javascript" src="https://unpkg.com/jquery"></script>
     {{!-- Ghost outputs important scripts and data with this tag --}}
     {{ghost_foot}}
     <!--script(type="text/javascript", src="{{asset 'js/jquery.fitvids.js'}}")-->
-    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
     <!--script(type="text/javascript", src="{{asset 'js/index.js'}}")-->
   </body>
 </html>

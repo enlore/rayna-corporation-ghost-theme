@@ -1,3 +1,9 @@
+.verticalCenter {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%); }
+
 .colorPrimary {
   color: #554971; }
 
@@ -52,7 +58,9 @@ hr {
 
 header, footer, article, section {
   padding-top: 5rem;
-  padding-bottom: 5rem; }
+  padding-bottom: 5rem;
+  padding-left: 16px;
+  padding-right: 16px; }
 
 .collapse {
   padding-top: 2rem;
@@ -193,10 +201,19 @@ a {
   max-width: 800px;
   line-height: 1.4; }
 
+.featuredPost {
+  padding: 16px; }
+
 .featuredPost-excerpt,
 .postSummary-excerpt {
   max-height: 150px;
-  overflow: hidden; }
+  overflow: hidden;
+  color: #9B9B9B; }
+
+.featuredPost-date,
+.postSummary-date {
+  font-weight: bold;
+  color: #9B9B9B; }
 
 .postSummary {
   margin-top: 48px; }
@@ -230,6 +247,7 @@ a {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     background-image: url("/assets/wedge.svg");
     background-repeat: no-repeat; }
   .faqBadge .wedge {
@@ -258,18 +276,21 @@ a {
   display: inline-block;
   padding: 0 16px;
   color: #fff;
-  top: 50%;
   position: relative;
-  transform: translateY(-50%); }
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%); }
 
 .navBar ul li a {
   color: #fff; }
 
 .navBar .subscribe-button {
-  position: absolute;
-  right: 0;
+  position: relative;
   top: 50%;
   transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  position: absolute;
+  right: 0;
   color: #fff; }
 
 .footer-socialLinks {
@@ -321,15 +342,8 @@ button {
 
 .btn--secondary {
   background-color: #B8F3FF;
-  color: #110E16; }
-
-.btn--emboss {
-  background-color: #B8F3FF;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: rgba(255, 255, 255, 0.5) 0px 3px 3px; }
+  color: #554971;
+  text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8); }
 
 textarea,
 input {
@@ -361,6 +375,9 @@ img {
 
 .postSummaries {
   padding-top: 2rem; }
+
+hr {
+  border: 1px solid #36213E; }
 
 ul {
   margin: 0; }
