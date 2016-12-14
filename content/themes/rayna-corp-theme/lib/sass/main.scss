@@ -7,6 +7,13 @@ $colorPrimary-shade: #36213E;
   background-color: rgba(85, 73, 113, $alpha)
 }
 
+@mixin vertical-center () {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
 .colorPrimary { color: $colorPrimary; }
 .colorPrimary-shade { color: $colorPrimary-shade; }
 
@@ -78,16 +85,14 @@ button {
 
 .btn--secondary {
   background-color: $colorSecondary-tint;
-  color: $black;
+  color: $colorPrimary;
+  //opacity: 0.5;
+  text-shadow:
+    -1px -1px 0px rgba(255,255,255,0.3),
+     1px  1px 0px rgba(0,0,0,0.8);
 }
 
-.btn--emboss {
-    background-color: $colorSecondary-tint;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+.btn--emboss span {
 }
 
 textarea,
