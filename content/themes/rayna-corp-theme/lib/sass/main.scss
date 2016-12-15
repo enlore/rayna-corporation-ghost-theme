@@ -157,3 +157,9 @@ ul {
     top: 50%;
     transform: translateY(-50%);
 }
+
+.hasBg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
