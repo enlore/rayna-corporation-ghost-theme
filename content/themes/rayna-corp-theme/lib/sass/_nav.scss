@@ -41,9 +41,14 @@
 
 .navBar ul li {
     display: inline-block;
+    height: 100%;
     padding: 0 16px;
     color: $white;
-    @include vertical-center();
+    line-height: 80px;
+}
+
+.nav-current {
+    box-shadow: inset 0px -5px 0px 0px $colorSecondary-tint;
 }
 
 .navBar ul li a {
