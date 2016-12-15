@@ -7,6 +7,7 @@
     float: left;
     padding: 16px;
     position: relative;
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
 
     .text {
         font-weight: 600;
@@ -22,9 +23,11 @@
         width: 100%;
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: -14px;
+        height: 40px;
+        transform: skewY(-14deg);
         display: block;
-        //background-color: $colorPrimary;
+        background-color: $colorSecondary-tint;
     }
 }
 
