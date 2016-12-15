@@ -1,0 +1,16 @@
+
+<nav class="primaryBg white">
+  <div class="navBar">
+    <div class="faqBadge"><span class="text">First time here?</span><span class="wedge"></span></div>
+    <ul>
+    {{#foreach navigation}}
+      <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}" role="presentation"><a href="{{url absolute="true"}}">{{label}}</a></li>
+    {{/foreach}}
+    </ul>
+    {{#if @labs.subscribers}}
+        <a class="subscribe-button" href="{{@blog.url}}/subscribe/">Subscribe</a>
+    {{else}}
+        <a class="subscribe-button icon-feed" href="{{@blog.url}}/rss/">Subscribe</a>
+    {{/if}}
+  </div>
+</nav>
