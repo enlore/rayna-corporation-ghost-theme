@@ -17,32 +17,141 @@
   </div>
   <section>
     <h1 class="colorPrimary">Contact Us</h1>
-    <div class="form colorPrimary" style="padding: 16px">
-      <div class="row">
-        <div class="inputGroup half">
-          <label>Name</label>
-          <input class="alt"/>
+    <div id="form">
+      <div class="form colorPrimary" style="padding: 16px">
+        <input type="text" style="display: none" v-model="robot"/>
+        <div class="row">
+          <div class="inputGroup half">
+            <label>Name</label>
+            <input class="alt" v-model="name"/>
+          </div>
+          <div class="inputGroup half">
+            <label>Phone</label>
+            <input class="alt" v-model="phone"/>
+          </div>
         </div>
-        <div class="inputGroup half">
-          <label>Phone</label>
-          <input class="alt"/>
+        <div class="whole row">
+          <div class="inputGroup">
+            <label>Email</label>
+            <input class="alt" v-model="email"/>
+          </div>
         </div>
-      </div>
-      <div class="whole row">
-        <div class="inputGroup">
-          <label>Email</label>
-          <input class="alt"/>
+        <div class="whole row">
+          <div class="inputGroup">
+            <label>Message</label>
+            <textarea class="alt" v-model="message"></textarea>
+          </div>
         </div>
-      </div>
-      <div class="whole row">
-        <div class="inputGroup">
-          <label>Message</label>
-          <textarea class="alt"></textarea>
+        <div class="row">
+          <div class="three-fourths" style="min-height: 1px">
+            <div class="form-message" v-if="info" style="position: relative"><img src="{{ asset 'close-button.svg' }}" @click="closeInfo" style="cursor: pointer; position: absolute; top: 8px; right: 8px; width: 16px; height: 16px"/><span>\{ info.message }</span></div>
+            <div class="form-error" v-if="error" style="position: relative"><img src="{{ asset 'close-button.svg' }}" @click="closeError" style="cursor: pointer; position: absolute; top: 8px; right: 8px; width: 16px; height: 16px"/><span>\{ error.message }</span></div>
+          </div>
+          <div class="fourth">
+            <button class="secondaryBg-tint u-pullRight" @click="submit" style="margin-top: 16px">Say Hey</button>
+          </div>
         </div>
-      </div>
-      <div class="whole row">
-        <button class="secondaryBg-tint u-pullRight" style="margin-top: 16px">Say Hey</button>
       </div>
     </div>
   </section>
-</main>{{/post}}
+</main>
+<!--script(id="template-posts-summary", type="text/x-template").-->
+<script type="text/javascript">
+  ;(function () {
+    function parseJSON(response) { return response.json() }
+  
+    function checkStatus(response) {
+      if (response.status >= 200 && response.status < 300) {
+        return response;
+      } else {
+        var error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
+    }
+  
+    window.addEventListener("load", function () {
+      var form = new Vue({
+        el: "#form",
+        data: {
+          email: "",
+          name: "",
+          phone: "",
+          message: "",
+          robot: "",
+          isValid: false,
+          isDirty: false,
+          error: null,
+          info: null
+        },
+  
+        methods: {
+          submit: function submit (ev) {
+            var postBody = {
+              email: this.email,
+              name: this.name,
+              phone: this.phone,
+              message: this.message
+            };
+  
+            if (this.robot !== '')
+              postBody['domo-arigato-mr-roboto'] = 'this looks like a robot';
+  
+            this.post(postBody);
+          },
+  
+          post: function post (body) {
+            var opts = {
+              method: "POST",
+              body: JSON.stringify(body),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            };
+  
+            var self = this;
+  
+            fetch('/api/ask-rayna', opts)
+            .then(checkStatus)
+            .then(function onJSON (body) {
+              self.loading = false;
+  
+              self.clear();
+  
+              self.info = {
+                message: "Thank you for your submission. We'll get back to you soon!"
+              };
+            })
+            .catch(function (err) {
+              self.loading = false;
+  
+              self.error = {
+                message: "Hey, something went wrong. Please try again or email <EMAIL HERE> directly."
+              };
+            });
+          },
+  
+          clear: function clear () {
+            this.email = "";
+            this.name = "";
+            this.phone= "";
+            this.message = "";
+            this.robot = "";
+            this.isDirty = false;
+            this.isValid = false;
+            this.info = null;
+            this.error = null;
+          },
+  
+          closeInfo: function closeInfo () { this.info = null; },
+          closeError: function closeError () { this.error = null; },
+        },
+  
+        delimiters: ['\\{', '}'],
+      });
+  
+      //form.mount();
+    });
+  })();
+  
+</script>{{/post}}
