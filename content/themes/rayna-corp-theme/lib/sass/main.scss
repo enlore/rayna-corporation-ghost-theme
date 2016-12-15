@@ -127,6 +127,12 @@ label {
   display: block;
 }
 
+.form-message,
+.form-error {
+  padding: 16px;
+  margin-top: 16px;
+}
+
 img {
     max-width: 100%;
     display: block;
