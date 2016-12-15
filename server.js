@@ -32,30 +32,32 @@ app.get('/api/ask-rayna', (req, res, next) => {
 })
 
 app.post('/api/ask-rayna', (req, res, next) => {
+    console.log(req.body)
+
     if (req.body['domo-arigato-mr-roboto'] !== void 0)
         return res.end()
 
     const mailOpts = pick(req.body, [
-        'ask-rayna-email',
-        'ask-rayna-phone',
-        'ask-rayna-name',
-        'ask-rayna-message'
+        'email',
+        'phone',
+        'name',
+        'message'
     ])
 
     console.info(mailOpts)
 
     const mailBody = `
-        From: ${mailOpts['ask-rayna-name']}\n
-        Contact Email: ${mailOpts['ask-rayna-email']}\n
-        Contact Phone: ${mailOpts['ask-rayna-phone']}\n
-        Question: ${mailOpts['ask-rayna-message']}\n
+        From: ${mailOpts['name']}\n
+        Contact Email: ${mailOpts['email']}\n
+        Contact Phone: ${mailOpts['phone']}\n
+        Question: ${mailOpts['message']}\n
     `
 
     const mailHtmlBody =`
-        <p> Submitter: ${mailOpts['ask-rayna-name']}</p>
-        <p> Contact Email: ${mailOpts['ask-rayna-email']}</p>
-        <p> Contact Phone: ${mailOpts['ask-rayna-phone']}</p>
-        <p> Question: ${mailOpts['ask-rayna-message']}</p>
+        <p> Submitter: ${mailOpts['name']}</p>
+        <p> Contact Email: ${mailOpts['email']}</p>
+        <p> Contact Phone: ${mailOpts['phone']}</p>
+        <p> Question: ${mailOpts['message']}</p>
     `
 
     const mail = new Email({
@@ -66,16 +68,47 @@ app.post('/api/ask-rayna', (req, res, next) => {
         text: mailBody
     })
 
+    const clientText = `Thanks for reaching out to us. We'll get back in touch with you soon.`
+    const clientHtml = "<p> Thanks for reaching out to us. We'll get back in touch with you soon. </p>"
+
+    const clientEmail = new Email({
+        to: `${mailOpts.name} <${mailOpts.email}>`,
+        from: 'app@raynacorp.com',
+        subject: 'Thank you for contacting us',
+        text: clientText,
+        html: clientHtml
+    })
+
+    let mailSent = 0;
+
+    mg.send({ email: clientEmail }, (err, resp) => {
+        if (err) {
+            err.syscall = 'MailGun.send'
+            return next(err)
+        }
+
+        mailSent++;
+
+        console.info(resp.body)
+
+        // 200 to client is all we need
+        if (mailSent === 2)
+            return res.end("")
+    })
+
     mg.send({ email: mail }, (err, resp) => {
         if (err) {
             err.syscall = 'MailGun.send'
             return next(err)
         }
 
+        mailSent++;
+
         console.info(resp.body)
 
         // 200 to client is all we need
-        return res.end()
+        if (mailSent === 2)
+            return res.end("")
     })
 })
 
