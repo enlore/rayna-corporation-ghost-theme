@@ -82,6 +82,10 @@ button {
    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5);
 }
 
+.btn--askRayna {
+  letter-spacing: 1px;
+}
+
 .btn--fullWidth {
     display: block;
     width: 100%;
@@ -91,9 +95,10 @@ button {
   background-color: $colorSecondary-tint;
   color: $colorPrimary;
   //opacity: 0.5;
+  font-family: 'Helvetica', sans-serif;
   text-shadow:
     -1px -1px 0px rgba(255,255,255,0.3),
-     1px  1px 0px rgba(0,0,0,0.8);
+     1px  1px 0px rgba(255,255,255,0.8);
 }
 
 .btn--emboss span {
