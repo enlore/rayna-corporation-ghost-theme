@@ -58,18 +58,6 @@
 <!--script(id="template-posts-summary", type="text/x-template").-->
 <script type="text/javascript">
   ;(function () {
-    function parseJSON(response) { return response.json() }
-  
-    function checkStatus(response) {
-      if (response.status >= 200 && response.status < 300) {
-        return response;
-      } else {
-        var error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-      }
-    }
-  
     window.addEventListener("load", function () {
       var form = new Vue({
         el: "#form",
@@ -112,7 +100,7 @@
             var self = this;
   
             fetch('/api/ask-rayna', opts)
-            .then(checkStatus)
+            .then(window.rayna.checkStatus)
             .then(function onJSON (body) {
               self.loading = false;
   

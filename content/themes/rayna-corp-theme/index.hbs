@@ -35,34 +35,7 @@
       </h2>
       <div class="half">
         <!--button.btn--secondary.btn--emboss.btn--fullWidth(style="margin-top: 16px;") #AskRayNa--><a href="/contact-us">
-          <button class="btn--secondary btn--emboss btn--fullWidth" style="margin-top: 32px">
-            <svg style="vertical-align: middle;" width="295px" height="36px" viewBox="19 20 295 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-               <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
-               <desc>Created with Sketch.</desc>
-               <defs>
-                   <text id="text-1" font-family="Lora-Bold, Lora" font-size="28" font-weight="bold" letter-spacing="-0.709333301">
-                       <tspan x="99.8150467" y="48">Ask RayNa</tspan>
-                   </text>
-                   <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
-                       <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
-                       <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
-                       <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
-                       <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
-                   </filter>
-                   <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
-                       <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
-                       <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
-                       <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
-                       <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
-                   </filter>
-               </defs>
-               <g id="Ask-RayNa" stroke="none" fill="none">
-                   <use fill="#63768D " fill-rule="evenodd" xlink:href="#text-1"></use>
-                   <use fill="#63768D " fill-opacity="1" filter="url(#filter-2)" xlink:href="#text-1"></use>
-                   <use fill="#63768D " fill-opacity="1" filter="url(#filter-3)" xlink:href="#text-1"></use>
-               </g>
-            </svg>
-          </button></a>
+          <button class="btn--secondary btn--emboss btn--fullWidth" style="margin-top: 32px">#AskRayNa</button></a>
         <p class="caption">It's really simple.</p>
       </div>
     </section>
@@ -77,8 +50,8 @@
         As efficiency experts, we help you make money faster, easier and smarter.
         We create systems for optimal growth, or maximize pre-existing ones.
         
-      </p>
-      <p class="colorPrimary bodyCopy--large"><a>Learn more &gt;&gt;</a></p>
+      </p><a href="/services">
+        <p class="colorPrimary bodyCopy--large">Learn more &gt;&gt;</p></a>
     </div>
     <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/></div>
   </section>
@@ -102,33 +75,96 @@
     <div class="whole">
       <p class="annotation">What we're talking about.</p>
     </div>
-    <div class="half"><img class="contentImg" src="http://placehold.it/520x475"/></div>
-    <div class="half">
-      <h1 class="colorPrimary">Five questions for Law Tech Entrepreneurs</h1>
-      <p class="bodyCopy--large">11/04/16  •  5 min read</p>
-      <p class="bodyCopy--large">
-        Recently Attorney at Work asked three legal technology entrepreneurs
-        — all speakers at this fall’s Clio Cloud Conference…
-        
-      </p>
-    </div>
-    <div class="row postSummaries">
-      <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/>
-        <h3 class="colorPrimary">Five questions for Law Tech Entrepreneurs</h3>
-        <p class="bodyCopy">
-          Recently Attorney at Work asked three legal technology entrepreneurs
-          — all speakers at this fall’s Clio Cloud Conference…
-        </p>
-        <p class="bodyCopy">11/04/16  •  5 min read</p>
+    <div id="featuredPost"><a class="postinner" v-if="post" :href="post.url">
+        <div class="half"><img class="contentImg" :src="post.image || 'http://placehold.it/520x475'"/></div>
+        <div class="half">
+          <h1 class="colorPrimary">{{ post.title }}</h1>
+          <p class="bodyCopy--large">11/04/16  •  5 min read</p>
+          <p class="bodyCopy--large">
+            Recently Attorney at Work asked three legal technology entrepreneurs
+            — all speakers at this fall’s Clio Cloud Conference…
+            
+          </p>
+        </div></a>
+      <div class="loading" v-else="v-else">
+        <p>loading</p>
       </div>
-      <div class="half"><img class="contentImg" src="http://placehold.it/450x300"/>
-        <h3 class="colorPrimary">Five questions for Law Tech Entrepreneurs</h3>
-        <p class="bodyCopy">
-          Recently Attorney at Work asked three legal technology entrepreneurs
-          — all speakers at this fall’s Clio Cloud Conference…
-        </p>
-        <p class="bodyCopy">11/04/16  •  5 min read</p>
+    </div>
+    <div class="row postSummaries" id="posts">
+      <div class="postsinner" v-if="posts.length &gt; 0">
+        <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" :src="post.image || 'http://placehold.it/450x300'"/>
+            <h3 class="colorPrimary">\{ post.title }</h3>
+            <p class="bodyCopy">\{ post.html | excerpt }</p>
+            <!--p.bodyCopy 11/04/16  •  5 min read-->
+            <p class="bodyCopy">\{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p></p></a></template>
+        <!--.half
+        //img.contentImg(src="http://placehold.it/450x300")
+        //h3.colorPrimary Five questions for Law Tech Entrepreneurs
+        //p.bodyCopy.
+          //Recently Attorney at Work asked three legal technology entrepreneurs
+          //— all speakers at this fall’s Clio Cloud Conference…
+        //p.bodyCopy 11/04/16  •  5 min read
+        
+        -->
+      </div>
+      <div class="loading" v-else="v-else">
+        <p>loading</p>
       </div>
     </div>
   </section>
 </main>
+<script type="text/javascript">
+  ;(function () {
+    window.addEventListener('load', function () {
+  
+      var featured = new Vue({
+        el: "#featuredPost",
+  
+        data: {
+          post: null
+        },
+  
+        delimiters: ['\\{', '}'],
+  
+        mounted: function () {}
+      });
+  
+      var posts = new Vue({
+        el: "#posts",
+  
+        data: {
+          posts: [],
+          loading: false
+        },
+  
+        delimiters: ['\\{', '}'],
+      });
+  
+      var featuredUrl = ghost.url.api('posts', { filter: 'featured:true' } );
+      console.log(featuredUrl)
+  
+      fetch(featuredUrl)
+      .then(window.rayna.checkstatus)
+      .then(window.rayna.parseJSON)
+      .then(function (body) {
+        featured.post = body.posts[0]
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+  
+      var postsUrl = ghost.url.api('posts', { filter: 'featured:false', limit: 2 })
+  
+      fetch(postsUrl)
+      .then(window.rayna.checkstatus)
+      .then(window.rayna.parseJSON)
+      .then(function (body) {
+        posts.posts = body.posts || []
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+  
+    });
+  })();
+</script>
