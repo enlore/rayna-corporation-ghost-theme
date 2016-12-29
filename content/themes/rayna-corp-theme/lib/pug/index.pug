@@ -34,7 +34,9 @@ main#content.content(role="main")
       .half
         //button.btn--secondary.btn--emboss.btn--fullWidth(style="margin-top: 16px;") #AskRayNa
         a(href="/contact-us")
-          button.btn--secondary.btn--emboss.btn--fullWidth(style="margin-top: 32px;")
+          button.btn--secondary.btn--emboss.btn--fullWidth(style="margin-top: 32px;") #AskRayNa
+          //- not buffered
+          //- button.btn--secondary.btn--emboss.btn--fullWidth(style="margin-top: 32px;")
               | <svg style="vertical-align: middle;" width="295px" height="36px" viewBox="19 20 295 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               |    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
               |    <desc>Created with Sketch.</desc>
@@ -75,8 +77,8 @@ main#content.content(role="main")
         As efficiency experts, we help you make money faster, easier and smarter.
         We create systems for optimal growth, or maximize pre-existing ones.
 
-      p.colorPrimary.bodyCopy--large
-        a Learn more &gt;&gt;
+      a(href="/services")
+        p.colorPrimary.bodyCopy--large Learn more &gt;&gt;
 
     .half
       img.contentImg(src="http://placehold.it/450x300")
@@ -99,15 +101,19 @@ main#content.content(role="main")
     .whole
       p.annotation What we're talking about.
 
-    .half
-      img.contentImg(src="http://placehold.it/520x475")
+    #featuredPost(v-if="post")
+      .half
+        img.contentImg( :src="post.image || 'http://placehold.it/520x475'")
 
-    .half
-      h1.colorPrimary Five questions for Law Tech Entrepreneurs
-      p.bodyCopy--large 11/04/16  •  5 min read
-      p.bodyCopy--large.
-        Recently Attorney at Work asked three legal technology entrepreneurs
-        — all speakers at this fall’s Clio Cloud Conference…
+      .half
+          h1.colorPrimary {{ post.title }}
+          p.bodyCopy--large 11/04/16  •  5 min read
+          p.bodyCopy--large.
+            Recently Attorney at Work asked three legal technology entrepreneurs
+            — all speakers at this fall’s Clio Cloud Conference…
+
+    #featuredPost(v-else)
+      p loading
 
     .row.postSummaries
       .half
@@ -125,3 +131,31 @@ main#content.content(role="main")
           Recently Attorney at Work asked three legal technology entrepreneurs
           — all speakers at this fall’s Clio Cloud Conference…
         p.bodyCopy 11/04/16  •  5 min read
+
+script(type="text/javascript").
+  ;(function () {
+    window.addEventListener('load', function () {
+      var featured = new Vue({
+        el: "#featuredPost",
+        data: {
+          post: null
+        },
+
+        mounted: function () {}
+      });
+
+      var featuredUrl = ghost.url.api('posts', { filter: 'featured:true' } );
+      console.log(featuredUrl)
+
+      fetch(featuredUrl)
+      .then(window.rayna.checkstatus)
+      .then(window.rayna.parseJSON)
+      .then(function (body) {
+        featured.post = body.posts[0]
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+
+    });
+  })();
