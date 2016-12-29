@@ -101,47 +101,68 @@ main#content.content(role="main")
     .whole
       p.annotation What we're talking about.
 
-    #featuredPost(v-if="post")
-      .half
-        img.contentImg( :src="post.image || 'http://placehold.it/520x475'")
+    #featuredPost
+      a.postinner(v-if="post", :href="post.url")
+        .half
+          img.contentImg( :src="post.image || 'http://placehold.it/520x475'")
 
-      .half
-          h1.colorPrimary {{ post.title }}
-          p.bodyCopy--large 11/04/16  •  5 min read
-          p.bodyCopy--large.
-            Recently Attorney at Work asked three legal technology entrepreneurs
-            — all speakers at this fall’s Clio Cloud Conference…
+        .half
+            h1.colorPrimary {{ post.title }}
+            p.bodyCopy--large 11/04/16  •  5 min read
+            p.bodyCopy--large.
+              Recently Attorney at Work asked three legal technology entrepreneurs
+              — all speakers at this fall’s Clio Cloud Conference…
 
-    #featuredPost(v-else)
-      p loading
+      .loading(v-else)
+        p loading
 
-    .row.postSummaries
-      .half
-        img.contentImg(src="http://placehold.it/450x300")
-        h3.colorPrimary Five questions for Law Tech Entrepreneurs
-        p.bodyCopy.
-          Recently Attorney at Work asked three legal technology entrepreneurs
-          — all speakers at this fall’s Clio Cloud Conference…
-        p.bodyCopy 11/04/16  •  5 min read
+    #posts.row.postSummaries
+      .postsinner(v-if="posts.length > 0")
+        template(v-for="post in posts")
+          a.half( :href="post.url")
+            img.contentImg( :src="post.image || 'http://placehold.it/450x300'")
+            h3.colorPrimary \{ post.title }
+            p.bodyCopy.
+              \{ post.html | excerpt }
+            //p.bodyCopy 11/04/16  •  5 min read
+            p.bodyCopy \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
 
-      .half
-        img.contentImg(src="http://placehold.it/450x300")
-        h3.colorPrimary Five questions for Law Tech Entrepreneurs
-        p.bodyCopy.
-          Recently Attorney at Work asked three legal technology entrepreneurs
-          — all speakers at this fall’s Clio Cloud Conference…
-        p.bodyCopy 11/04/16  •  5 min read
+        //.half
+          //img.contentImg(src="http://placehold.it/450x300")
+          //h3.colorPrimary Five questions for Law Tech Entrepreneurs
+          //p.bodyCopy.
+            //Recently Attorney at Work asked three legal technology entrepreneurs
+            //— all speakers at this fall’s Clio Cloud Conference…
+          //p.bodyCopy 11/04/16  •  5 min read
+
+      .loading(v-else)
+        p loading
 
 script(type="text/javascript").
   ;(function () {
     window.addEventListener('load', function () {
+
       var featured = new Vue({
         el: "#featuredPost",
+
         data: {
           post: null
         },
 
+        delimiters: ['\\{', '}'],
+
         mounted: function () {}
+      });
+
+      var posts = new Vue({
+        el: "#posts",
+
+        data: {
+          posts: [],
+          loading: false
+        },
+
+        delimiters: ['\\{', '}'],
       });
 
       var featuredUrl = ghost.url.api('posts', { filter: 'featured:true' } );
@@ -152,6 +173,18 @@ script(type="text/javascript").
       .then(window.rayna.parseJSON)
       .then(function (body) {
         featured.post = body.posts[0]
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+
+      var postsUrl = ghost.url.api('posts', { filter: 'featured:false', limit: 2 })
+
+      fetch(postsUrl)
+      .then(window.rayna.checkstatus)
+      .then(window.rayna.parseJSON)
+      .then(function (body) {
+        posts.posts = body.posts || []
       })
       .catch(function (err) {
         console.error(err)

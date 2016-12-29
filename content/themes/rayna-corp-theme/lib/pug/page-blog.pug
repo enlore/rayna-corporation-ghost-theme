@@ -60,7 +60,9 @@ script(id="template-posts-summary", type="text/x-template").
             <div class="postSummary-copy half">
               <h2 class="postSummary-title"> \{ post.title } </h2>
 
-              <div class="postSummary-excerpt" v-html="post.html"></div>
+              <div class="postSummary-excerpt">
+                \{ post.html | excerpt }
+              </div>
               <p class="postSummary-date"> \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
             </div>
           </a>
