@@ -259,7 +259,8 @@ a {
     height: 40px;
     transform: skewY(-14deg);
     display: block;
-    background-color: #B8F3FF; }
+    background-color: #B8F3FF;
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4); }
 
 .navBar {
   max-width: 1000px;
@@ -341,6 +342,9 @@ button {
   cursor: pointer;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.5); }
 
+.btn--askRayna {
+  letter-spacing: 1px; }
+
 .btn--fullWidth {
   display: block;
   width: 100%; }
@@ -348,7 +352,8 @@ button {
 .btn--secondary {
   background-color: #B8F3FF;
   color: #554971;
-  text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8); }
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.8); }
 
 textarea,
 input {
@@ -368,6 +373,7 @@ input.alt {
   color: #110E16; }
 
 textarea {
+  padding: 16px 16px 16px 0.5rem;
   min-height: 250px; }
 
 label {
