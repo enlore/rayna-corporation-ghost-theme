@@ -8,7 +8,7 @@
 | {{#post}}
 
 main
-  .primaryBg-shade.black.hasBg(style="background-image: url('{{ asset 'services-banner.jpg' }}');")
+  .primaryBg-shade.white.hasBg(style="background-image: url('{{ asset 'services-banner.jpg' }}');")
     header
       //-p.bigQuote “
       h1.whole We're Ready When You Are
@@ -67,7 +67,7 @@ main
       .products
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'clio-logo.png' }}")
 
           .three-fourths
             h3 Clio
@@ -78,18 +78,18 @@ main
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(style="padding-top: 26px;", src="{{ asset 'casemail-logo.png' }}")
 
           .three-fourths
             h3 CaseMail
             p.
-              does for mailing hard documents what e-faxing has done for faxes.
+              CaseMail does for mailing hard documents what e-faxing has done for faxes.
               We at the RayNa Corporation have first-hand knowledge of how the simple,
               mundane tasks of your everyday work life can eat away at your productivity
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'chrometa-logo.png' }}")
 
           .three-fourths
             h3 Chrometa
@@ -101,7 +101,7 @@ main
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'rocket-matter-logo.png' }}")
 
           .three-fourths
             h3 RocketMatter
@@ -114,7 +114,7 @@ main
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'click-to-file-logo.png' }}")
 
           .three-fourths
             h3 ClicktoFile
@@ -126,7 +126,7 @@ main
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'law-pay-logo.png' }}")
 
           .three-fourths
             h3 LawPay
@@ -138,7 +138,7 @@ main
 
         .productGroup.row
           .fourth
-            img(src="//placehold.it/150x150")
+            img(src="{{ asset 'hootsuite-logo.png' }}")
 
           .three-fourths
             h3 Hootsuite
