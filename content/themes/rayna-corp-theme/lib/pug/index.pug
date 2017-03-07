@@ -87,15 +87,13 @@ main#content.content(role="main")
 
   .indexIntro.secondaryBg-shade.white
     section
-      .half
-        h2 See what everyone is yappin’ about.
+      h2 See what everyone is yappin’ about.
 
-      .half.white
-        h3 Brett Owens
-        p.bodyCopy--large CEO & Co-Founder, Chrometa
-        p.
-          RayNa Corp is our #1 partner in the industry. We literally consider
-          them apart of our own team and so do our clients.
+      .white
+        #testimonial-slider
+          h3 \{ testimonials[activeIndex].author }
+          //p.bodyCopy--large CEO & Co-Founder, Chrometa
+          p \{ testimonials[activeIndex].content }
 
   section
     .whole
@@ -141,6 +139,61 @@ main#content.content(role="main")
 script(type="text/javascript").
   ;(function () {
     window.addEventListener('load', function () {
+
+      var slider = new Vue({
+        el: "#testimonial-slider",
+        data: {
+          interval: null,
+          intervalTime: 8000,
+          activeIndex: 0,
+          testimonials: [
+            {
+              content: "RayNa Corp is our #1 partner in the industry. I've worked with Lori for several years now and she's so great with our clients that we literally consider her a part of our own team (and so do our clients!) I have actually had several tell me that I need to do whatever I need to do to keep Lori around for the long haul.",
+              author: 'Brett Owens, CEO & Co-Founder, Chrometa'
+            },
+            {
+              content: "I am extremely pleased with the work done by The Rayna Corporation. From the very beginning we knew that we made the right decision trusting them with our medical record retrieval needs. Their systematic procedures and efficiencies have increased our receiving time from on average of 98 days to 85% of all records being received within 30 days. Rayna’s services have allowed us to settle cases faster and focus on our clients instead of being tangled in the never-ending task of waiting on medical records.",
+              author: "Bart Durham Injury Law"
+            },
+            {
+              content: "We have been so impressed with the Rayna Corporation. They have taken the stress and tediousness out of billing and keeping time. We no longer have to worry about clients' invoices, which allows us to focus on other parts of our practice.  They also have been monumental in teaching us how to run our whole practice more smoothly. We get helpful hints and training on a daily basis and they are always available to answer questions. They know everything about Clio, Xero, Chrometa, and tons of other programs designed to help you keep time and work more efficiently.  Rayna has been a huge part of the growth of our firm, and we don't know where we'd be without them!",
+              author: "LaRoche Law Office"
+            },
+            {
+              content: "I am very happy that RayNa came along to fill a need in my law practice.  Lori is patient, kind, and ever helpful.  I am glad to be able to call her a business partner, but, more importantly, to be able to call her a friend.  I couldn't be happier with my partnership with RayNa.  I trust Lori's experience and applaud her work ethic.  She is helpful, kind, and patient (even when I've asked the same question ten times!).  Glad to be a client of RayNa's.",
+              author: "Margaret Brady, Attorney"
+            },
+            {
+              content: "RayNa has been an invaluable resource to me as an attorney moving into Tennessee from out of state and starting a new practice.  Lori has gone out of her way to help me get started here both directly and through introductions.  She is friendly, patient and hard working.  She also understands what is needed and how to achieve the necessary result.  I’m delighted to have worked with Lori and RayNa and highly recommend them.",
+              author: "Patrick McMurtray, Attorney"
+            },
+            {
+              content: "We at Greenhouse love our association with RayNa Corporation and Lori Gonzalez, Lori has such a heart to serve others by finding solutions to any situation that might be a barrier to their success.  Lori was very instrumental several years ago in setting up the Free Rutherford/ Cannon County Legal Clinic at Greenhouse and remains available to refresh each host on duties, and keeps legal form files up to date when needed.",
+              author: "Jane Sharp Director, Greenhouse Ministries"
+            },
+            {
+              content: "I stumbled across Lori and her services from an online Webinar for timekeeping software.  Immediately she empathized with our small law firm billing and accounting issues—mainly time constraints! Fortunately, I found Lori’s services to be affordable for our small firm, and I hired her to help switch us to a more efficient accounting application. During the transition period, Lori always responded timely to my questions via email and/or by phone call, and regularly kept me apprised of the progress on her end.  Interestingly, I have never met Lori in person and she has never been to our office, because the entire implementation and training process was done seamlessly over the internet!  The fact that her services could be provided via the internet was a big plus in terms of allowing for flexibility based on my availability. I believe Lori’s background, personal experience, and knowledge, enables her to provide a niche service to firms like ours that need advice in choosing and fully implementing the right software and/or applications to help get timekeeping, billing, and accounting issues under control.   She has earned my recommendation.",
+              author: "Kathy Crisp Floyd Finch Law Offices Blue Springs, Missouri"
+            }
+          ]
+        },
+
+        delimiters: ['\\{', '}'],
+
+        methods: {
+
+        },
+
+        mounted () {
+          this.interval = setInterval(() => {
+            this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
+          }, this.intervalTime)
+        },
+
+        beforeDestroy () {
+          clearInterval(this.interval)
+        }
+      });
 
       var featured = new Vue({
         el: "#featuredPost",
