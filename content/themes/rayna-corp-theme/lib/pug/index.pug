@@ -102,7 +102,8 @@ main#content.content(role="main")
     #featuredPost
       a.postinner(v-if="post", :href="post.url")
         .half
-          img.contentImg( :src="post.image || 'http://placehold.it/520x475'")
+          img.contentImg(v-if="post.image", :src="post.image")
+          img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
 
         .half
             h1.colorPrimary {{ post.title }}
@@ -118,7 +119,9 @@ main#content.content(role="main")
       .postsinner(v-if="posts.length > 0")
         template(v-for="post in posts")
           a.half( :href="post.url")
-            img.contentImg( :src="post.image || 'http://placehold.it/450x300'")
+            img.contentImg(v-if="post.image", :src="post.image")
+            img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
+
             h3.colorPrimary \{ post.title }
             p.bodyCopy.
               \{ post.html | excerpt }

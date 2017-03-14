@@ -71,7 +71,7 @@
       <p class="annotation">What we're talking about.</p>
     </div>
     <div id="featuredPost"><a class="postinner" v-if="post" :href="post.url">
-        <div class="half"><img class="contentImg" :src="post.image || 'http://placehold.it/520x475'"/></div>
+        <div class="half"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/></div>
         <div class="half">
           <h1 class="colorPrimary">{{ post.title }}</h1>
           <p class="bodyCopy--large">11/04/16  •  5 min read</p>
@@ -87,7 +87,7 @@
     </div>
     <div class="row postSummaries" id="posts">
       <div class="postsinner" v-if="posts.length &gt; 0">
-        <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" :src="post.image || 'http://placehold.it/450x300'"/>
+        <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/>
             <h3 class="colorPrimary">\{ post.title }</h3>
             <p class="bodyCopy">\{ post.html | excerpt }</p>
             <!--p.bodyCopy 11/04/16  •  5 min read-->
