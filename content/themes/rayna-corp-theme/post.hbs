@@ -2,9 +2,9 @@
 {{!< default}}
 {{#post}}
 {{#if image }}
-<div class="bgWrap" style="background-image: url('/assets/desk-img.jpg');">
+<div class="bgWrap" style="background-size: cover; background-image: url({{ image }});">
 {{else }}
-<div class="bgWrap" style="background-image: url('/assets/desk-img.jpg');">
+<div class="bgWrap" style="background-size: cover; background-image: url('/assets/desk-img.jpg');">
 {{/if }}
 <div class="blackGradientMask">
   <div class="articleHeader white">
@@ -26,14 +26,14 @@
   </div>
 </div>
 <section>{{#prev_post}}<a href="{{url}}">
-    <div class="half"><img src="//placehold.it/450x300"/>
+    <div class="half">{{#if image}}<img src="{{ image }}"/>{{else}}<img src="{{ asset 'desk-img.jpg' }}"/>{{/if}}
       <h3>{{ title }}</h3>
       <p>{{ excerpt words="20" }} &hellip;</p>
       <p>11/04/16 • 5 min read</p>
     </div></a>
   {{/prev_post}}
   {{#next_post}}<a href="{{url}}">
-    <div class="half"><img src="//placehold.it/450x300"/>
+    <div class="half">{{#if image}}<img src="{{ image }}"/>{{else}}<img src="{{ asset 'desk-img.jpg' }}"/>{{/if}}
       <h3>{{ title }}</h3>
       <p>{{ excerpt words="20" }} &hellip;</p>
       <p>11/04/16 • 5 min read</p>

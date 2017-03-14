@@ -3,9 +3,9 @@
 | {{#post}}
 
 | {{#if image }}
-| <div class="bgWrap" style="background-image: url('/assets/desk-img.jpg');">
+| <div class="bgWrap" style="background-size: cover; background-image: url({{ image }});">
 | {{else }}
-| <div class="bgWrap" style="background-image: url('/assets/desk-img.jpg');">
+| <div class="bgWrap" style="background-size: cover; background-image: url('/assets/desk-img.jpg');">
 | {{/if }}
 
 .blackGradientMask
@@ -32,7 +32,11 @@ section
   | {{#prev_post}}
   a(href="{{url}}")
     .half
-      img(src="//placehold.it/450x300")
+      | {{#if image}}
+      img(src="{{ image }}")
+      | {{else}}
+      img(src="{{ asset 'desk-img.jpg' }}")
+      | {{/if}}
       h3 {{ title }}
       p {{ excerpt words="20" }} &hellip;
       p 11/04/16 • 5 min read
@@ -41,7 +45,11 @@ section
   | {{#next_post}}
   a(href="{{url}}")
     .half
-      img(src="//placehold.it/450x300")
+      | {{#if image}}
+      img(src="{{ image }}")
+      | {{else}}
+      img(src="{{ asset 'desk-img.jpg' }}")
+      | {{/if}}
       h3 {{ title }}
       p {{ excerpt words="20" }} &hellip;
       p 11/04/16 • 5 min read
