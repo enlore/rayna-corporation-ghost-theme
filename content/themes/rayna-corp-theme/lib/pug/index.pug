@@ -91,9 +91,10 @@ main#content.content(role="main")
 
       .white
         #testimonial-slider
-          h3 \{ testimonials[activeIndex].author }
-          //p.bodyCopy--large CEO & Co-Founder, Chrometa
-          p \{ testimonials[activeIndex].content }
+          .slide(ref="slide")
+            h3 \{ testimonials[activeIndex].author }
+            //p.bodyCopy--large CEO & Co-Founder, Chrometa
+            p \{ testimonials[activeIndex].content }
 
   section
     .whole
@@ -184,13 +185,27 @@ script(type="text/javascript").
         delimiters: ['\\{', '}'],
 
         methods: {
+          animateNext () {
 
+          }
         },
 
         mounted () {
-          this.interval = setInterval(() => {
-            this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
-          }, this.intervalTime)
+          this.$nextTick(() => {
+            this.interval = setInterval(() => {
+
+              window.TweenLite.to(this.$refs.slide, 0.8, {
+                opacity: 0,
+                onComplete: () => {
+                  this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
+
+                  window.TweenLite.to(this.$refs.slide, 0.8, {
+                    opacity: 1
+                  })
+                }
+              })
+            }, this.intervalTime)
+          })
         },
 
         beforeDestroy () {

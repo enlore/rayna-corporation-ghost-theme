@@ -59,9 +59,11 @@
       <h2>See what everyone is yappin’ about.</h2>
       <div class="white">
         <div id="testimonial-slider">
-          <h3>\{ testimonials[activeIndex].author }</h3>
-          <!--p.bodyCopy--large CEO & Co-Founder, Chrometa-->
-          <p>\{ testimonials[activeIndex].content }</p>
+          <div class="slide" ref="slide">
+            <h3>\{ testimonials[activeIndex].author }</h3>
+            <!--p.bodyCopy--large CEO & Co-Founder, Chrometa-->
+            <p>\{ testimonials[activeIndex].content }</p>
+          </div>
         </div>
       </div>
     </section>
@@ -153,13 +155,27 @@
         delimiters: ['\\{', '}'],
   
         methods: {
+          animateNext () {
   
+          }
         },
   
         mounted () {
-          this.interval = setInterval(() => {
-            this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
-          }, this.intervalTime)
+          this.$nextTick(() => {
+            this.interval = setInterval(() => {
+  
+              window.TweenLite.to(this.$refs.slide, 0.8, {
+                opacity: 0,
+                onComplete: () => {
+                  this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
+  
+                  window.TweenLite.to(this.$refs.slide, 0.8, {
+                    opacity: 1
+                  })
+                }
+              })
+            }, this.intervalTime)
+          })
         },
   
         beforeDestroy () {
