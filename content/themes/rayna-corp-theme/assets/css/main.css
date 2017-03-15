@@ -171,6 +171,9 @@ a {
 .bold {
   font-weight: bold; }
 
+.underline {
+  border-bottom: 2px solid white; }
+
 .portraitGroup h1 {
   font-size: 32px; }
 
