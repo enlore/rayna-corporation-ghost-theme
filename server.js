@@ -8,6 +8,8 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
+console.info(`Running in ${process.env.NODE_ENV} environment`)
+
 const bodyParser = require('body-parser')
 
 const MailGun = require('./mg.js')
