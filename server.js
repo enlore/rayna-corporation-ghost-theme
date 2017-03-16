@@ -46,7 +46,7 @@ app.post('/api/ask-rayna', (req, res, next) => {
         'message'
     ])
 
-    console.info(mailOpts)
+    console.info('incoming submission form', mailOpts)
 
     const mailBody = `
         From: ${mailOpts['name']}\n
@@ -80,6 +80,9 @@ app.post('/api/ask-rayna', (req, res, next) => {
         text: clientText,
         html: clientHtml
     })
+
+    console.info('email to rayna', mail)
+    console.info('email to potential client', clientEmail)
 
     let mailSent = 0;
 
