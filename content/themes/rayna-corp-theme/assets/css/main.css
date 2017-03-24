@@ -62,6 +62,9 @@ header, footer, article, section {
   padding-left: 16px;
   padding-right: 16px; }
 
+article li {
+  margin-top: 1rem; }
+
 .collapse {
   padding-top: 2rem;
   padding-bottom: 2rem; }
