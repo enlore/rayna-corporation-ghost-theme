@@ -100,42 +100,44 @@ main#content.content(role="main")
     .whole
       p.annotation What we're talking about.
 
-    #featuredPost
-      .loading(v-if="loading")
-        p loading
+      #featuredPost(style="overflow: hidden;")
+        .loading(v-if="loading")
+          p loading
 
-      .loaded(v-else)
-        a.postinner(v-if="post", :href="post.url")
-          .half
-            img.contentImg(v-if="post.image", :src="post.image")
-            img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
-
-          .half
-              h1.colorPrimary(style="margin-top: 0;") \{ post.title }
-              p.bodyCopy--large 11/04/16  •  5 min read
-              p.bodyCopy--large.postSummary-excerpt \{ post.html | excerpt }
-
-        p.no-posts(v-else) Nothing here yet. Check back soon.
-
-    #posts.row.postSummaries
-      .loading(v-if="loading")
-        p loading
-
-      .loaded(v-else)
-        .postsinner(v-if="posts.length > 0")
-          template(v-for="post in posts")
-            a.half( :href="post.url")
+        .loaded(v-else)
+          a.postinner(v-if="post", :href="post.url")
+            .half
               img.contentImg(v-if="post.image", :src="post.image")
               img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
 
-              h3.colorPrimary \{ post.title }
-              p.bodyCopy.postSummary-excerpt.
-                \{ post.html | excerpt }
+            .half
+                h1.colorPrimary(style="margin-top: 0;") \{ post.title }
+                p.bodyCopy--large 11/04/16  •  5 min read
+                p.bodyCopy--large.postSummary-excerpt \{ post.html | excerpt }
 
-              //- p.bodyCopy 11/04/16  •  5 min read
-              p.bodyCopy \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
+          p.no-posts(v-else) Nothing here yet. Check back soon.
 
-        p.no-posts(v-else) Nothing here yet. Check back soon.
+      hr(style="margin-top: 48px;")
+
+      #posts.row.postSummaries
+        .loading(v-if="loading")
+          p loading
+
+        .loaded(v-else)
+          .postsinner(v-if="posts.length > 0")
+            template(v-for="post in posts")
+              a.half( :href="post.url")
+                img.contentImg(v-if="post.image", :src="post.image")
+                img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
+
+                h3.colorPrimary \{ post.title }
+                p.bodyCopy.postSummary-excerpt.
+                  \{ post.html | excerpt }
+
+                //- p.bodyCopy 11/04/16  •  5 min read
+                p.bodyCopy \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
+
+          p.no-posts(v-else) Nothing here yet. Check back soon.
 
 script(type="text/javascript").
   ;(function () {
