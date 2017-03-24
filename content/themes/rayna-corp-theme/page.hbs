@@ -4,14 +4,19 @@
     attributes by default, but you can also customise it to behave differently if you prefer. --}}
 {{!-- Everything inside the #post tags pulls data from the page --}}
 {{#post}}
-<header>
-  <p>barf</p>
-</header>
-<main class="content">
-  <article class="{{ post_class }}">
-    <header class="postHeader">
-      <h1 class="postTitle">{{ title }}</h1>
+<main>
+  <div class="primaryBg-shade white">
+    <header>
+      <h1 class="whole">First time here?</h1>
+      <p class="seven">
+        Here's some good introductory info to get you acquainted with what we do.
+        
+      </p>
     </header>
-    <section class="postContent">{{ content }}</section>
+  </div>
+  <article class="{{ post_class }}">
+    <div class="row">
+      <div class="whole postContent">{{ content }}</div>
+    </div>
   </article>
 </main>{{/post}}

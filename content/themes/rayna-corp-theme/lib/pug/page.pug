@@ -7,14 +7,15 @@
 
 | {{#post}}
 
-header
-  p barf
+main
+  .primaryBg-shade.white
+    header
+      h1.whole First time here?
+      p.seven.
+        Here's some good introductory info to get you acquainted with what we do.
 
-main.content
   article(class="{{ post_class }}")
-    header.postHeader
-      h1.postTitle {{ title }}
-
-    section.postContent {{ content }}
+    .row
+      .whole.postContent {{ content }}
 
 | {{/post}}
