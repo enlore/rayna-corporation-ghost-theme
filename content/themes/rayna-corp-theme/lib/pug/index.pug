@@ -111,7 +111,7 @@ main#content.content(role="main")
             img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
 
           .half
-              h1.colorPrimary \{ post.title }
+              h1.colorPrimary(style="margin-top: 0;") \{ post.title }
               p.bodyCopy--large 11/04/16  •  5 min read
               p.bodyCopy--large \{ post.html | excerpt }
 

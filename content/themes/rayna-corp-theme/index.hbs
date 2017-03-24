@@ -79,7 +79,7 @@
       <div class="loaded" v-else="v-else"><a class="postinner" v-if="post" :href="post.url">
           <div class="half"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/></div>
           <div class="half">
-            <h1 class="colorPrimary">\{ post.title }</h1>
+            <h1 class="colorPrimary" style="margin-top: 0">\{ post.title }</h1>
             <p class="bodyCopy--large">11/04/16  •  5 min read</p>
             <p class="bodyCopy--large">\{ post.html | excerpt }</p>
           </div></a>
