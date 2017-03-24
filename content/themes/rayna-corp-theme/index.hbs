@@ -81,7 +81,7 @@
           <div class="half">
             <h1 class="colorPrimary" style="margin-top: 0">\{ post.title }</h1>
             <p class="bodyCopy--large">11/04/16  •  5 min read</p>
-            <p class="bodyCopy--large">\{ post.html | excerpt }</p>
+            <p class="bodyCopy--large postSummary-excerpt">\{ post.html | excerpt }</p>
           </div></a>
         <p class="no-posts" v-else="v-else">Nothing here yet. Check back soon.</p>
       </div>
@@ -94,7 +94,7 @@
         <div class="postsinner" v-if="posts.length &gt; 0">
           <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/>
               <h3 class="colorPrimary">\{ post.title }</h3>
-              <p class="bodyCopy">
+              <p class="bodyCopy postSummary-excerpt">
                 \{ post.html | excerpt }
                 
               </p>

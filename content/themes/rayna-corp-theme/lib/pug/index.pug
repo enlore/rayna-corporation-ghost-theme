@@ -113,7 +113,7 @@ main#content.content(role="main")
           .half
               h1.colorPrimary(style="margin-top: 0;") \{ post.title }
               p.bodyCopy--large 11/04/16  •  5 min read
-              p.bodyCopy--large \{ post.html | excerpt }
+              p.bodyCopy--large.postSummary-excerpt \{ post.html | excerpt }
 
         p.no-posts(v-else) Nothing here yet. Check back soon.
 
@@ -129,7 +129,7 @@ main#content.content(role="main")
               img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
 
               h3.colorPrimary \{ post.title }
-              p.bodyCopy.
+              p.bodyCopy.postSummary-excerpt.
                 \{ post.html | excerpt }
 
               //- p.bodyCopy 11/04/16  •  5 min read
