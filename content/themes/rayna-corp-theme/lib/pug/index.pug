@@ -101,44 +101,41 @@ main#content.content(role="main")
       p.annotation What we're talking about.
 
     #featuredPost
-      a.postinner(v-if="post", :href="post.url")
-        .half
-          img.contentImg(v-if="post.image", :src="post.image")
-          img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
-
-        .half
-            h1.colorPrimary {{ post.title }}
-            p.bodyCopy--large 11/04/16  •  5 min read
-            p.bodyCopy--large.
-              Recently Attorney at Work asked three legal technology entrepreneurs
-              — all speakers at this fall’s Clio Cloud Conference…
-
-      .loading(v-else)
+      .loading(v-if="loading")
         p loading
 
-    #posts.row.postSummaries
-      .postsinner(v-if="posts.length > 0")
-        template(v-for="post in posts")
-          a.half( :href="post.url")
+      .loaded(v-else)
+        a.postinner(v-if="post", :href="post.url")
+          .half
             img.contentImg(v-if="post.image", :src="post.image")
             img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
 
-            h3.colorPrimary \{ post.title }
-            p.bodyCopy.
-              \{ post.html | excerpt }
-            //p.bodyCopy 11/04/16  •  5 min read
-            p.bodyCopy \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
+          .half
+              h1.colorPrimary \{ post.title }
+              p.bodyCopy--large 11/04/16  •  5 min read
+              p.bodyCopy--large \{ post.html | excerpt }
 
-        //.half
-          //img.contentImg(src="http://placehold.it/450x300")
-          //h3.colorPrimary Five questions for Law Tech Entrepreneurs
-          //p.bodyCopy.
-            //Recently Attorney at Work asked three legal technology entrepreneurs
-            //— all speakers at this fall’s Clio Cloud Conference…
-          //p.bodyCopy 11/04/16  •  5 min read
+        p.no-posts(v-else) Nothing here yet. Check back soon.
 
-      .loading(v-else)
+    #posts.row.postSummaries
+      .loading(v-if="loading")
         p loading
+
+      .loaded(v-else)
+        .postsinner(v-if="posts.length > 0")
+          template(v-for="post in posts")
+            a.half( :href="post.url")
+              img.contentImg(v-if="post.image", :src="post.image")
+              img.contentImg(v-else, src="{{ asset 'desk-img.jpg' }}")
+
+              h3.colorPrimary \{ post.title }
+              p.bodyCopy.
+                \{ post.html | excerpt }
+
+              //- p.bodyCopy 11/04/16  •  5 min read
+              p.bodyCopy \{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p>
+
+        p.no-posts(v-else) Nothing here yet. Check back soon.
 
 script(type="text/javascript").
   ;(function () {
@@ -185,30 +182,32 @@ script(type="text/javascript").
         delimiters: ['\\{', '}'],
 
         methods: {
-          animateNext () {
+          animateNext: function () {
 
           }
         },
 
-        mounted () {
-          this.$nextTick(() => {
-            this.interval = setInterval(() => {
+        mounted: function () {
+          var self = this
 
-              window.TweenLite.to(this.$refs.slide, 0.8, {
+          self.$nextTick(function () {
+            self.interval = setInterval(function () {
+
+              window.TweenLite.to(self.$refs.slide, 0.8, {
                 opacity: 0,
-                onComplete: () => {
-                  this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
+                onComplete: function () {
+                  self.activeIndex = (self.activeIndex + 1) % self.testimonials.length
 
-                  window.TweenLite.to(this.$refs.slide, 0.8, {
+                  window.TweenLite.to(self.$refs.slide, 0.8, {
                     opacity: 1
                   })
                 }
               })
-            }, this.intervalTime)
+            }, self.intervalTime)
           })
         },
 
-        beforeDestroy () {
+        beforeDestroy: function () {
           clearInterval(this.interval)
         }
       });
@@ -217,12 +216,11 @@ script(type="text/javascript").
         el: "#featuredPost",
 
         data: {
+          loading: false,
           post: null
         },
 
         delimiters: ['\\{', '}'],
-
-        mounted: function () {}
       });
 
       var posts = new Vue({

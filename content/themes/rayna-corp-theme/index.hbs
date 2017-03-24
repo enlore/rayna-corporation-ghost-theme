@@ -72,40 +72,35 @@
     <div class="whole">
       <p class="annotation">What we're talking about.</p>
     </div>
-    <div id="featuredPost"><a class="postinner" v-if="post" :href="post.url">
-        <div class="half"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/></div>
-        <div class="half">
-          <h1 class="colorPrimary">{{ post.title }}</h1>
-          <p class="bodyCopy--large">11/04/16  •  5 min read</p>
-          <p class="bodyCopy--large">
-            Recently Attorney at Work asked three legal technology entrepreneurs
-            — all speakers at this fall’s Clio Cloud Conference…
-            
-          </p>
-        </div></a>
-      <div class="loading" v-else="v-else">
+    <div id="featuredPost">
+      <div class="loading" v-if="loading">
         <p>loading</p>
+      </div>
+      <div class="loaded" v-else="v-else"><a class="postinner" v-if="post" :href="post.url">
+          <div class="half"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/></div>
+          <div class="half">
+            <h1 class="colorPrimary">\{ post.title }</h1>
+            <p class="bodyCopy--large">11/04/16  •  5 min read</p>
+            <p class="bodyCopy--large">\{ post.html | excerpt }</p>
+          </div></a>
+        <p class="no-posts" v-else="v-else">Nothing here yet. Check back soon.</p>
       </div>
     </div>
     <div class="row postSummaries" id="posts">
-      <div class="postsinner" v-if="posts.length &gt; 0">
-        <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/>
-            <h3 class="colorPrimary">\{ post.title }</h3>
-            <p class="bodyCopy">\{ post.html | excerpt }</p>
-            <!--p.bodyCopy 11/04/16  •  5 min read-->
-            <p class="bodyCopy">\{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p></p></a></template>
-        <!--.half
-        //img.contentImg(src="http://placehold.it/450x300")
-        //h3.colorPrimary Five questions for Law Tech Entrepreneurs
-        //p.bodyCopy.
-          //Recently Attorney at Work asked three legal technology entrepreneurs
-          //— all speakers at this fall’s Clio Cloud Conference…
-        //p.bodyCopy 11/04/16  •  5 min read
-        
-        -->
-      </div>
-      <div class="loading" v-else="v-else">
+      <div class="loading" v-if="loading">
         <p>loading</p>
+      </div>
+      <div class="loaded" v-else="v-else">
+        <div class="postsinner" v-if="posts.length &gt; 0">
+          <template v-for="post in posts"><a class="half" :href="post.url"><img class="contentImg" v-if="post.image" :src="post.image"/><img class="contentImg" v-else="v-else" src="{{ asset 'desk-img.jpg' }}"/>
+              <h3 class="colorPrimary">\{ post.title }</h3>
+              <p class="bodyCopy">
+                \{ post.html | excerpt }
+                
+              </p>
+              <p class="bodyCopy">\{ post.published_at | fmatDate } • \{ post.markdown | calcReadTime } min read</p></p></a></template>
+        </div>
+        <p class="no-posts" v-else="v-else">Nothing here yet. Check back soon.</p>
       </div>
     </div>
   </section>
@@ -155,30 +150,32 @@
         delimiters: ['\\{', '}'],
   
         methods: {
-          animateNext () {
+          animateNext: function () {
   
           }
         },
   
-        mounted () {
-          this.$nextTick(() => {
-            this.interval = setInterval(() => {
+        mounted: function () {
+          var self = this
   
-              window.TweenLite.to(this.$refs.slide, 0.8, {
+          self.$nextTick(function () {
+            self.interval = setInterval(function () {
+  
+              window.TweenLite.to(self.$refs.slide, 0.8, {
                 opacity: 0,
-                onComplete: () => {
-                  this.activeIndex = (this.activeIndex + 1) % this.testimonials.length
+                onComplete: function () {
+                  self.activeIndex = (self.activeIndex + 1) % self.testimonials.length
   
-                  window.TweenLite.to(this.$refs.slide, 0.8, {
+                  window.TweenLite.to(self.$refs.slide, 0.8, {
                     opacity: 1
                   })
                 }
               })
-            }, this.intervalTime)
+            }, self.intervalTime)
           })
         },
   
-        beforeDestroy () {
+        beforeDestroy: function () {
           clearInterval(this.interval)
         }
       });
@@ -187,12 +184,11 @@
         el: "#featuredPost",
   
         data: {
+          loading: false,
           post: null
         },
   
         delimiters: ['\\{', '}'],
-  
-        mounted: function () {}
       });
   
       var posts = new Vue({
