@@ -24,7 +24,7 @@
     "superagent": "^3.0.0"
   },
   "engines": {
-    "node": "^4.2.0"
+    "node": "^4.8.4"
   },
   "scripts": {
     "postinstall": "ncp node_modules/casper content/themes/casper",
